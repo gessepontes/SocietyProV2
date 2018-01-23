@@ -1,0 +1,63 @@
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.Pessoa>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right_col" role="main">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2> <a asp-action="Create">Nova Pessoa</a></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NOME)</th>
+                            <th>@Html.DisplayNameFor(model => model.TELEFONE)</th>
+                            <th>@Html.DisplayNameFor(model => model.EMAIL)</th>
+                            <th>@Html.DisplayNameFor(model => model.ATIVO)</th>
+                            <th>@Html.DisplayNameFor(model => model.CONFIRMACAO)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TELEFONE)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.EMAIL)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ATIVO)
+                                </td>
+                                <td>
+                                    @Html.ValueFor(modelItem => item.CONFIRMACAO, "{0:dd/MM/yyyy}")
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Pessoa" , new { id = item.ID })"><i class="fa fa-pencil-square-o"></i></a> |
+                                    <a href="@Url.Action("Delete", "Pessoa" , new { id = item.ID })"><i class="fa fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

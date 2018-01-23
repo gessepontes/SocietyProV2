@@ -1,0 +1,102 @@
+﻿@model SocietyProV2.Domain.Entities.Time
+@using SocietyProV2.Domain.Entities
+@using SocietyProV2.Domain.Diversos
+
+@{
+    ViewData["Title"] = "Novo time";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Novo Time</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form enctype="multipart/form-data" asp-controller="Time" asp-action="Create" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="IDPESSOA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDPESSOA"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))">
+                                        <option value="">Selecione uma pessoa</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDPESSOA" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="NOME" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="NOME" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="NOME" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="OBSERVACAO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="OBSERVACAO" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="OBSERVACAO" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DATAFUNDACAO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="DATAFUNDACAO" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="DATAFUNDACAO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TIPO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="TIPO"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoTime))))">
+                                        <option value="">Selecione um tipo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="TIPO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="SIMBOLO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="SIMBOLO" type="file" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="SIMBOLO" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Time")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

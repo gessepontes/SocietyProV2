@@ -1,0 +1,146 @@
+﻿@model SocietyProV2.Domain.Entities.Campo
+
+@{
+    ViewData["Title"] = "Editar campo";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar Campo</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form enctype="multipart/form-data" asp-controller="Campo" asp-action="Edit" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                            <div class="form-group">
+                                <label asp-for="IDPESSOA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDPESSOA"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))">
+                                        <option value="">Selecione uma pessoa</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDPESSOA" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="NOME" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="NOME" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="NOME" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ENDERECO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="ENDERECO" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="ENDERECO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TELEFONE" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="TELEFONE" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(99) 9999-9999'" />
+                                </div>
+
+                                <span asp-validation-for="TELEFONE" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="VALOR" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="VALOR" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="VALOR" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="VALORMENSAL" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="VALORMENSAL" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="VALORMENSAL" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDCIDADE" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDCIDADE"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCidade,"ID", "NOME"))">
+                                        <option value="">Selecione uma cidade</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDCIDADE" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="SOCIETY" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="SOCIETY" class="col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="SOCIETY" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CAMPO11" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="CAMPO11" class="col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="CAMPO11" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="AGENDAMENTO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="AGENDAMENTO" class="col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="AGENDAMENTO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="LOGO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="LOGO" type="file" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="LOGO" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Campo")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

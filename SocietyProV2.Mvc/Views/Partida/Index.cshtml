@@ -1,0 +1,77 @@
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.Partida>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right_col" role="main">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2> <a asp-action="Create">Nova Partida</a></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.TimeCasa.NOME)</th>
+                            <th>@Html.DisplayNameFor(model => model.GOL1)</th>
+                            <th>@Html.DisplayNameFor(model => model.GOL2)</th>
+                            <th>@Html.DisplayNameFor(model => model.TimeFora.NOME)</th>
+                            <th>@Html.DisplayNameFor(model => model.DATAPARTIDA)</th>
+                            <th>@Html.DisplayNameFor(model => model.STATUSPARTIDA)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TimeCasa.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GOL1)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GOL2)
+                                </td>
+                                <td>
+                                    @if (item.IDTIME2 == 2)
+                                    {
+                                        @Html.DisplayFor(modelItem => item.TIMENAOCADASTRADO)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.TimeFora.NOME)
+                                    }
+
+                                </td>
+                                <td>
+                                    @Html.ValueFor(modelItem => item.DATAPARTIDA, "{0:dd/MM/yyyy}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.STATUSPARTIDA)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Partida" , new { id = item.ID })"><i class="fa fa-pencil-square-o"></i></a> |
+                                    <a href="@Url.Action("Delete", "Partida" , new { id = item.ID })"><i class="fa fa-trash"></i></a> |
+                                    <a href="@Url.Action("Jogador", "Partida" , new { id = item.ID, IDTime = item.IDTIME1 })"><i class="fa fa-users"></i></a> |
+                                    <a href="@Url.Action("Gol", "Partida" , new { id = item.ID, IDTime = item.IDTIME1 })"><i class="fa fa-futbol-o"></i></a> 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

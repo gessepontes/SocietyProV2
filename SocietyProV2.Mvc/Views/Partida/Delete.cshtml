@@ -1,0 +1,78 @@
+﻿@model SocietyProV2.Domain.Entities.Partida
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+
+    <div class="x_panel">
+        <div class="clearfix"></div>
+        <div class="row">
+            <h3>Você tem certeza que deseja excluir este registro?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Campo.NOME)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Campo.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DATAPARTIDA)
+                </dt>
+                <dd>
+                    @Html.ValueFor(model => model.DATAPARTIDA, "{0:dd/MM/yyyy}") -   @Html.DisplayFor(model => model.HORAPARTIDA)
+                </dd>
+                <dt>
+                    Time Casa
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TimeCasa.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GOL1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GOL1)
+                </dd>
+                <dt>
+                    Time Fora
+                </dt>
+                <dd>
+                    @if (Model.IDTIME2 == 2)
+                    {
+                        @Html.DisplayFor(model => model.TIMENAOCADASTRADO)
+                    }
+                    else
+                    {
+                        @Html.DisplayFor(model => model.TimeFora.NOME)
+                    }
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.GOL2)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.GOL2)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.STATUSPARTIDA)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.STATUSPARTIDA)
+                </dd>
+
+            </dl>
+
+            <form asp-action="Delete">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="submit" asp-action="Index">Voltar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

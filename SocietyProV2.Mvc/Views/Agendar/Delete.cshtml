@@ -1,0 +1,86 @@
+﻿@model SocietyProV2.Domain.Entities.Agendamento
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+
+    <div class="x_panel">
+        <div class="clearfix"></div>
+        <div class="row">
+            <h3>Você tem certeza que deseja excluir este registro?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CAMPO)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CAMPO)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.DATA)
+                </dt>
+
+                <dd>
+                    @Html.ValueFor(model => model.DATA, "{0:dd/MM/yyyy}")
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.HORA)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.HORA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.PESSOA)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PESSOA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TELEFONE)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TELEFONE)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.STATUS)
+                </dt>
+
+                <dd>
+                    @if (Model.STATUS == "A")
+                    {
+                        @Html.Label("Aprovado")
+                    }
+                    else if (Model.STATUS == "C")
+                    {
+                        @Html.Label("Cancelado")
+                    }
+                    else
+                    {
+                        @Html.Label("Pendente")
+                    }
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="submit" asp-action="Index">Voltar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

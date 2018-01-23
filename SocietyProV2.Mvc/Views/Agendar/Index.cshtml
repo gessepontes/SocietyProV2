@@ -1,0 +1,80 @@
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.Agendamento>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right_col" role="main">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2> <a asp-action="Create">Novo Agendamento</a></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.CAMPO)</th>
+                            <th>@Html.DisplayNameFor(model => model.DATA)</th>
+                            <th>@Html.DisplayNameFor(model => model.HORA)</th>
+                            <th>@Html.DisplayNameFor(model => model.PESSOA)</th>
+                            <th>@Html.DisplayNameFor(model => model.TELEFONE)</th>
+                            <th>@Html.DisplayNameFor(model => model.STATUS)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CAMPO)
+                                </td>
+                                <td>
+                                    @Html.ValueFor(modelItem => item.DATA, "{0:dd/MM/yyyy}")
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HORA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PESSOA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TELEFONE)
+                                </td>
+                                <td>
+                                    @if (item.STATUS == "A")
+                                    {
+                                        @Html.Label("Aprovado")
+                                    }
+                                    else if (item.STATUS == "C")
+                                    {
+                                        @Html.Label("Cancelado")
+                                    }
+                                    else
+                                    {
+                                        @Html.Label("Pendente")
+                                    }
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Agendar" , new { id = item.ID })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Delete", "Agendar" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Status", "Agendar" , new { id = item.ID ,status = "A" })"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Status", "Agendar" , new { id = item.ID , status = "C" })"><i class="fa fa-thumbs-down fa-lg" aria-hidden="true"></i></a> 
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

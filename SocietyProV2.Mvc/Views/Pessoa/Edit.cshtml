@@ -1,0 +1,155 @@
+﻿@model SocietyProV2.Domain.Entities.Pessoa
+@using SocietyProV2.Domain.Entities
+@using SocietyProV2.Domain.Diversos
+
+@{
+    ViewData["Title"] = "Editar pessoa";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar Pessoa</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form enctype="multipart/form-data" asp-controller="Pessoa" asp-action="Edit" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="NOME" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="NOME" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="NOME" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="EMAIL" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="EMAIL" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="EMAIL" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CPF" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="CPF" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '999.999.999-99'" />
+                                </div>
+
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="RG" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="RG" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="RG" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="DATANASCIMENTO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="DATANASCIMENTO" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="DATANASCIMENTO" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="TELEFONE" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="TELEFONE" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(99) 99999-9999'" />
+                                </div>
+
+                                <span asp-validation-for="TELEFONE" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FOTO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="FOTO" type="file" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="FOTO" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="SENHA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <input asp-for="SENHA" type="password" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CONFIRMACAO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <input asp-for="CONFIRMACAO" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ATIVO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <input asp-for="ATIVO" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+
+                            <div class="form-group">
+                                <label asp-for="PERFIL" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    @foreach (TipoPerfil item in Enum.GetValues(typeof(TipoPerfil)))
+            {
+                var nomePerfil = EnumHelper<TipoPerfil>.GetDisplayValue(item);
+                var check = "";
+
+                if (Model.PESSOAPERFIL.Where(p => p.TIPOPERFIL == item).Count() > 0)
+                {
+                    check = "checked";
+                }
+                else
+                {
+                    check = "";
+                }
+
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"
+                                       @check
+                                       name="PERFILSELECIONADO"
+                                       value="@item" /> @nomePerfil
+                                </label>
+                            </div>
+}
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Pessoa")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

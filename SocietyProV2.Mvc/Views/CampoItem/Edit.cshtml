@@ -1,0 +1,71 @@
+﻿@model SocietyProV2.Domain.Entities.CampoItem
+
+@{
+    ViewData["Title"] = "Editar campo item";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar Campo Item</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form enctype="multipart/form-data" asp-controller="CampoItem" asp-action="Edit" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                            <div class="form-group">
+                                <label asp-for="IDCAMPO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDCAMPO"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))">
+                                        <option value="">Selecione um campo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDCAMPO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DESCRICAO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="DESCRICAO" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="DESCRICAO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="ATIVO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="ATIVO" class="col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="ATIVO" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "CampoItem")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

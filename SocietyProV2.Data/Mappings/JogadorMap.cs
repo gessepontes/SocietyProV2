@@ -1,0 +1,14 @@
+﻿using Dapper.FluentMap.Dommel.Mapping;
+using SocietyProV2.Domain.Entities;
+
+namespace SocietyProV2.Data.Mappings
+{
+    public class JogadorMap : DommelEntityMap<Jogador>
+    {
+        public JogadorMap()
+        {
+            ToTable("JOGADOR");
+            Map(p => p.ID).IsKey().IsIdentity();
+        }
+    }
+}

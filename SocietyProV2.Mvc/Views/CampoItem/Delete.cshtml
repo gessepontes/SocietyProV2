@@ -1,0 +1,46 @@
+﻿@model SocietyProV2.Domain.Entities.CampoItem
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+
+    <div class="x_panel">
+        <div class="clearfix"></div>
+        <div class="row">
+            <h3>Você tem certeza que deseja excluir este registro?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Campo.NOME)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Campo.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.DESCRICAO)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DESCRICAO)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ATIVO)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ATIVO)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="submit" asp-action="Index">Voltar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,140 @@
+﻿@model SocietyProV2.Domain.Entities.Partida
+
+@{
+    ViewData["Title"] = "Nova partida";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Nova Partida</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form asp-controller="Partida" asp-action="Create" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="IDCAMPO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDCAMPO"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))">
+                                        <option value="">Selecione o campo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDCAMPO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDTIME1" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDTIME1"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaTime,"ID", "NOME"))">
+                                        <option value="">Selecione um time</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDTIME1" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="GOL1" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="GOL1" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="GOL1" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="GOL2" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="GOL2" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="GOL2" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Time não cadastrado</label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input type="checkbox" name="checkbox"  id="checkbox" class="col-md-7 col-xs-12" value="check" onchange="MudarEstado();" />
+                                </div>                                
+                            </div>
+
+                            <div id="DivTimeCadastrado">
+                                <div class="form-group">
+                                    <label asp-for="IDTIME2" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <select asp-for="IDTIME2"
+                                                class="form-control" asp-items="@(new SelectList(@ViewBag.ListaTime,"ID", "NOME"))">
+                                            <option value="">Selecione um time</option>
+                                        </select>
+                                    </div>
+
+                                    <span asp-validation-for="IDTIME2" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div id="DivTimeNaoCadastrado" style="display:none">
+                                <div class="form-group">
+                                    <label asp-for="TIMENAOCADASTRADO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-2 col-sm-6 col-xs-12">
+                                        <input asp-for="TIMENAOCADASTRADO" class="form-control col-md-7 col-xs-12" />
+                                    </div>
+                                </div>
+
+                                <span asp-validation-for="TIMENAOCADASTRADO" class="text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="DATAPARTIDA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="DATAPARTIDA" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="DATAPARTIDA" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="HORAPARTIDA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="HORAPARTIDA" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="HORAPARTIDA" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Partida")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(function () {
+            DatetimePickerHora("#HORAPARTIDA");
+        });
+    </script>
+
+    <script src="~/js/diversos.js"></script>
+
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
