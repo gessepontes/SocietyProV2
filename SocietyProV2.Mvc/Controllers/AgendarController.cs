@@ -102,6 +102,7 @@ namespace SocietyProV2.Mvc.Controllers
 
         public IActionResult Delete(int? id)
         {
+            //Delete
             if (id == null)
                 return NotFound();
 
