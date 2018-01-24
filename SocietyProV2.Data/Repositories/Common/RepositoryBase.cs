@@ -37,6 +37,7 @@ namespace SocietyProV2.Data.Repositories.Common
                     c.AddMap(new HorarioMap());
                     c.AddMap(new HorarioExtraMap());
                     c.AddMap(new AgendarMap());
+                    c.AddMap(new CampeonatoMap());
 
                     c.ForDommel();
                 });

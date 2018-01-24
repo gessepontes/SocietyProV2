@@ -1,0 +1,219 @@
+﻿@model SocietyProV2.Domain.Entities.Campeonato
+@using SocietyProV2.Domain.Entities
+
+@{
+    ViewData["Title"] = "Editar campeonato";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar Campeonato</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form enctype="multipart/form-data" asp-action="Editar" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                            <div class="form-group">
+                                <label asp-for="IDPESSOA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDPESSOA"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))">
+                                        <option value="">Selecione um responsável</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDPESSOA" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="sNome" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="sNome" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="sNome" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="TIPO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="TIPO"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoTime))))">
+                                        <option value="">Selecione o tipo do campeonato</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="TIPO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iTipoCampeonato" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="iTipoCampeonato"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoCampeonato))))">
+                                        <option value="">Selecione o estilo de campeonato</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="iTipoCampeonato" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iTipoArbitragem" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="iTipoArbitragem"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoArbitragem))))">
+                                        <option value="">Selecione a regra de arbitragem</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="iTipoArbitragem" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iCodCampo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="iCodCampo"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))">
+                                        <option value="">Selecione um campo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="iCodCampo" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="dDataInicio" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="dDataInicio" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="dDataInicio" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="dDataFim" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="dDataFim" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="dDataFim" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iQuantidadeTimes" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="iQuantidadeTimes" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="iQuantidadeTimes" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="bPreInscricao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="bPreInscricao" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="bIdaVolta" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="bIdaVolta" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="bDisponivelTransmissao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="bDisponivelTransmissao" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="bDisponivelInscricao" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="bDisponivelInscricao" type="checkbox" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="LOGO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <input asp-for="LOGO" type="file" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="LOGO" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+
+                            <div class="x_panel">
+                                <div class="x_title">
+                                    <h2> <a asp-action="CreateInfor">Nova Informação</a></h2>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+                                    <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Descrição</th>
+                                                <th>Sequencia</th>
+                                                <th>Foto</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @foreach (var item in Model.FotoInforCampeonato)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.NOME)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ISEQUENCIA)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FOTO)
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("DeleteInfor", "Campeonato" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Campeonato")'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -56,7 +56,7 @@ namespace SocietyProV2.Mvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=CampoItem}/{action=Index}/{id?}");
+                    template: "{controller=Agendar}/{action=Index}/{id?}");
             });
         }
     }

@@ -22,6 +22,8 @@ namespace SocietyProV2.IoC
             services.AddScoped<IHorarioRepository, HorarioRepository>();
             services.AddScoped<IHorarioExtraRepository, HorarioExtraRepository>();
             services.AddScoped<IAgendarRepository, AgendarRepository>();
+            services.AddScoped<ICampeonatoRepository, CampeonatoRepository>();
+            services.AddScoped<IFotoInforCampeonatoRepository, FotoInforCampeonatoRepository>();
 
         }
 

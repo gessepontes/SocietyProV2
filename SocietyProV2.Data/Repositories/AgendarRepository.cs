@@ -2,8 +2,10 @@
 using SocietyProV2.Data.Repositories.Common;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace SocietyProV2.Data.Repositories
 {
@@ -39,5 +41,21 @@ namespace SocietyProV2.Data.Repositories
         }
 
         public void Status(int id, char status) => conn.Execute("UPDATE HORARIOAGENDADO SET STATUS=@status  WHERE ID = @id; ", new { status, id });
+
+        public IEnumerable<Agendamento> GetHorarios(DateTime date, int idItemCampo, TipoHorario idTipo)
+        {
+            string query;
+
+            if ((int)idTipo == 1) {
+                query = "SELECT HP.ID,HP.HORARIO HORA FROM HORARIOPADRAO HP WHERE HP.IDITEMCAMPO = @idItemCampo AND HP.DIASEMANA = DATEPART(DW,@date) - 1 AND HP.ID NOT IN (select IDHORARIO FROM HORARIOAGENDADO WHERE DATA = @date AND TIPOHORARIO = 1 AND STATUS IN ('P','A')) ";
+            }
+            else {
+                query = "SELECT HE.ID,HE.HORARIO HORA FROM HORARIOEXTRA HE WHERE HE.IDITEMCAMPO = @idItemCampo AND HE.DATA = @date AND HE.ID NOT IN (select IDHORARIO from HORARIOAGENDADO WHERE DATA = @date AND TIPOHORARIO = 2 AND STATUS IN ('P','A')) ";
+            } 
+                                   
+            query += "ORDER BY HORA ";
+
+            return conn.Query<Agendamento>(query, new { date, idItemCampo }).ToList();
+        }
     }
 }

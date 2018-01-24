@@ -1,5 +1,6 @@
 ﻿using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories.Common;
+using System;
 using System.Collections.Generic;
 
 namespace SocietyProV2.Domain.Interfaces.Repositories
@@ -9,5 +10,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
         IEnumerable<Agendamento> GetAllAgendamento();
         Agendamento GetByIdAgendamento(int? id);
         void Status(int id,char status);
+        IEnumerable<Agendamento> GetHorarios(DateTime date, int idItemCampo, TipoHorario idTipo);
     }
 }

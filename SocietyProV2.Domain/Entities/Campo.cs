@@ -108,5 +108,9 @@ namespace SocietyProV2.Domain.Entities
         [Display(Name = "Horário")]
         public virtual ICollection<CampoHorario> CampoHorario { get; set; }
 
+        [Display(Name = "Campeonato")]
+        public virtual ICollection<Campeonato> Campeonato { get; set; }
+
+
     }
 }

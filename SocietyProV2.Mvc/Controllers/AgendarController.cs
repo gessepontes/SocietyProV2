@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
+using System;
 using Vereyon.Web;
 
 namespace SocietyProV2.Mvc.Controllers
@@ -16,8 +16,8 @@ namespace SocietyProV2.Mvc.Controllers
         private readonly IFlashMessage _flashMessage;
 
 
-        public AgendarController(IHorarioExtraRepository horarioExtraRepository, IHorarioRepository horarioRepository, IFlashMessage flashMessage, 
-            IAgendarRepository agendarRepository, ICampoItemRepository campoItemRepository, 
+        public AgendarController(IHorarioExtraRepository horarioExtraRepository, IHorarioRepository horarioRepository, IFlashMessage flashMessage,
+            IAgendarRepository agendarRepository, ICampoItemRepository campoItemRepository,
             IPessoaRepository pessoaRepository)
         {
             _agendarRepository = agendarRepository;
@@ -56,50 +56,6 @@ namespace SocietyProV2.Mvc.Controllers
         }
 
 
-        public IActionResult Edit(int? id)
-        {
-            if (id == null)
-                return NotFound();
-
-            var agendar = _agendarRepository.GetById(id);
-            if (agendar == null)
-                return NotFound();
-
-            ViewBag.ListaCampo = _campoItemRepository.GetAllCampoItemDrop();
-            ViewBag.ListaPessoa = _pessoaRepository.GetAllPessoaDrop();
-
-            return View(agendar);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID,DATA,IDHORARIO,TIPOHORARIO,TIPO,STATUS,IDPESSOA,CLIENTENAOCADASTRADO,TELEFONE,DATACADASTRO,IDPESSOACANCELAMENTO,MARCADOAPP")] Agendar _agendar)
-        {
-            if (id != _agendar.ID)
-                return NotFound();
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _agendarRepository.Update(_agendar);
-                    _flashMessage.Confirmation("Operação realizada com sucesso!");
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AgendarExists(_agendar.ID))
-                        return NotFound();
-                    else
-                    {
-                        _flashMessage.Danger("Erro ao realizar a operação!");
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(_agendar);
-        }
-
         public IActionResult Delete(int? id)
         {
             //Delete
@@ -135,8 +91,10 @@ namespace SocietyProV2.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult ListaHorario(DateTime DATA, int IDCAMPO, TipoHorario TIPOHORARIO) => Json(_agendarRepository.GetHorarios(DATA, IDCAMPO, TIPOHORARIO));
+
         private bool AgendarExists(int id) =>
-            _agendarRepository.GetById(id) != null;
+        _agendarRepository.GetById(id) != null;
     }
 
 }

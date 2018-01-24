@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Campo</label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <select id="IDCAMPO" name="IDCAMPO"
+                                    <select id="IDCAMPO" name="IDCAMPO" onchange="zerarDataTipoHorario()"
                                             class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "DESCRICAO"))">
                                         <option value="">Selecione um campo item</option>
                                     </select>
@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label asp-for="DATA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <input asp-for="DATA" class="form-control col-md-7 col-xs-12" />
+                                    <input asp-for="DATA" class="form-control col-md-7 col-xs-12" onchange="zerarTipoHorario()" />
                                 </div>
 
                                 <span asp-validation-for="DATA" class="text-danger"></span>
@@ -44,7 +44,7 @@
                             <div class="form-group">
                                 <label asp-for="TIPOHORARIO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-3 col-sm-6 col-xs-12">
-                                    <select asp-for="TIPOHORARIO"
+                                    <select asp-for="TIPOHORARIO" onchange="ListaHorarioCampoItem()"
                                             class="form-control"
                                             asp-items="@(new SelectList(Enum.GetValues(typeof(TipoHorario))))">
                                         <option value="">Selecione o tipo de horário</option>
@@ -52,6 +52,19 @@
                                 </div>
 
                                 <span asp-validation-for="TIPOHORARIO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDHORARIO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="IDHORARIO"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enumerable.Empty<SelectListItem>(), "id", "hora"))">
+                                        <option value="">Selecione o horário disponível</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDHORARIO" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -67,19 +80,11 @@
                                 <span asp-validation-for="TIPO" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group">
-                                <label asp-for="IDHORARIO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <input asp-for="IDHORARIO" class="form-control col-md-7 col-xs-12" />
-                                </div>
-
-                                <span asp-validation-for="IDHORARIO" class="text-danger"></span>
-                            </div>
 
                             <div class="form-group">
                                 <label asp-for="IDPESSOA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <select asp-for="IDPESSOA"
+                                    <select asp-for="IDPESSOA" onchange="HabilitaDiv();"
                                             class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))">
                                         <option value="">Selecione uma pessoa</option>
                                     </select>
@@ -88,21 +93,23 @@
                                 <span asp-validation-for="IDPESSOA" class="text-danger"></span>
                             </div>
 
-                            <div class="form-group">
-                                <label asp-for="CLIENTENAOCADASTRADO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <input asp-for="CLIENTENAOCADASTRADO" class="form-control col-md-7 col-xs-12" />
-                                </div>
-                                <span asp-validation-for="CLIENTENAOCADASTRADO" class="text-danger"></span>
-                            </div>
-
-                            <div class="form-group">
-                                <label asp-for="TELEFONE" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
-                                <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <input asp-for="TELEFONE" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(99) 9999-9999'" />
+                            <div id="divCliente">
+                                <div class="form-group">
+                                    <label asp-for="CLIENTENAOCADASTRADO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-5 col-sm-6 col-xs-12">
+                                        <input asp-for="CLIENTENAOCADASTRADO" class="form-control col-md-7 col-xs-12" />
+                                    </div>
+                                    <span asp-validation-for="CLIENTENAOCADASTRADO" class="text-danger"></span>
                                 </div>
 
-                                <span asp-validation-for="TELEFONE" class="text-danger"></span>
+                                <div class="form-group">
+                                    <label asp-for="TELEFONE" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                    <div class="col-md-2 col-sm-6 col-xs-12">
+                                        <input asp-for="TELEFONE" class="form-control col-md-7 col-xs-12" data-inputmask="'mask' : '(99) 9999-9999'" />
+                                    </div>
+
+                                    <span asp-validation-for="TELEFONE" class="text-danger"></span>
+                                </div>
                             </div>
 
                             <div class="ln_solid"></div>
@@ -123,4 +130,74 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+
+        function HabilitaDiv() {
+            var IDPESSOA = document.getElementById('IDPESSOA').value;
+
+            if (IDPESSOA == "") {
+                document.getElementById('divCliente').style.display = 'block';
+                document.getElementById('CLIENTENAOCADASTRADO').value = "";
+                document.getElementById('TELEFONE').value = "";
+            }
+            else {
+                document.getElementById('divCliente').style.display = 'none';
+            }
+        }
+
+        function zerarDataTipoHorario() {
+            $('#DATA').val("");
+            $('#TIPOHORARIO').val("");
+        }
+
+        function zerarTipoHorario() {
+            $('#TIPOHORARIO').val("");
+        }
+
+        function ListaHorarioCampoItem() {
+            var IDCAMPO = $('#IDCAMPO').val();
+            var DATA = $('#DATA').val();
+            var TIPOHORARIO = $('#TIPOHORARIO').val();
+
+            if (IDCAMPO == "") {
+                alert("Campo é um campo obrigatório!")
+                return false;
+            }
+
+            if (DATA == "") {
+                alert("Data é um campo obrigatório!")
+                $('#DATA').val("");
+                return false;
+            }
+
+            $.ajax({
+                url: '/Agendar/ListaHorario',
+                type: "GET",
+                dataType: "JSON",
+                data: { DATA: DATA, IDCAMPO: IDCAMPO, TIPOHORARIO: TIPOHORARIO },
+                success: function (horarios) {
+                    $("#IDHORARIO").html(""); // clear before appending new list
+
+                    $("#IDHORARIO").append(
+                        $('<option></option>').val("").html("Selecione o horário disponível"));
+
+
+                    $.each(horarios, function (i, hora) {
+                        $("#IDHORARIO").append(
+                            $('<option></option>').val(hora.id).html(hora.hora));
+                    });
+                },
+                error: function (horarios) {
+                    $("#IDHORARIO").html("");
+
+                    $("#IDHORARIO").append(
+                        $('<option></option>').val("").html("Selecione o horário disponível"));
+                }
+            });
+
+
+        }
+
+    </script>
 }

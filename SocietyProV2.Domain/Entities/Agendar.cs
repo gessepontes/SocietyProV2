@@ -7,6 +7,8 @@ namespace SocietyProV2.Domain.Entities
     {
         public Agendar()
         {
+            STATUS = "A";
+            DATACADASTRO = DateTime.Now;
         }
 
         public int ID { get; set; }
