@@ -61,15 +61,17 @@ namespace SocietyProV2.Mvc.Controllers
             return View(_campeonato);
         }
 
-        public IActionResult CreateInfor(int? id)
+        public IActionResult CreateInfor(int? IDCampeonato)
         {
-            if (id == null)
+            if (IDCampeonato == null)
                 return NotFound();
 
-            ViewBag.ListaCampo = _campoRepository.GetAll();
-            ViewBag.ListaPessoa = _pessoaRepository.GetAllPessoaDrop();
+            ViewBag.Sequencia = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
-            return View();
+            FotoInforCampeonato _campeonatoInfor = new FotoInforCampeonato();
+            _campeonatoInfor.IDCAMPEONATO = IDCampeonato ?? 0;
+
+            return PartialView("_CreateInfor", _campeonatoInfor);
         }
 
 
@@ -87,7 +89,7 @@ namespace SocietyProV2.Mvc.Controllers
 
                 _fotoInforCampeonatoRepository.Add(_campeonatoInfor);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit),new { id = _campeonatoInfor.IDCAMPEONATO });
             }
 
             return View(_campeonatoInfor);
@@ -169,7 +171,7 @@ namespace SocietyProV2.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        [ValidateAntiForgeryToken]
+        [HttpGet]
         public IActionResult DeleteConfirmedInfor(int id)
         {
             var _campeonatoInfor = _fotoInforCampeonatoRepository.GetById(id);
@@ -177,7 +179,7 @@ namespace SocietyProV2.Mvc.Controllers
 
             _flashMessage.Confirmation("Operação realizada com sucesso!");
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Edit), new { id = _campeonatoInfor.IDCAMPEONATO });
         }
 
         private bool CampeonatoExists(int id) =>

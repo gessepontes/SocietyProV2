@@ -161,7 +161,7 @@
 
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2> <a asp-action="CreateInfor">Nova Informação</a></h2>
+                                    <h2><a href="@Url.Action("CreateInfor", "Campeonato" , new { IDCampeonato = Model.IDCampeonato })" class="modal-link">Nova Informação</a></h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
@@ -189,7 +189,7 @@
                                                         @Html.DisplayFor(modelItem => item.FOTO)
                                                     </td>
                                                     <td>
-                                                        <a href="@Url.Action("DeleteInfor", "Campeonato" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                                        <a href="@Url.Action("DeleteConfirmedInfor", "Campeonato" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                                                     </td>
                                                 </tr>
                                             }
@@ -200,7 +200,7 @@
 
                             <div class="ln_solid"></div>
                             <div class="form-group">
-                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <div class="col-md-6 col-sm-6 col-xs-12">
                                     <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Campeonato")'">Voltar</button>
                                     <button type="submit" class="btn btn-success">Salvar</button>
                                 </div>
