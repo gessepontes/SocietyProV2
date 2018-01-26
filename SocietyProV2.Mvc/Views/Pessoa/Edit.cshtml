@@ -109,28 +109,28 @@
 
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     @foreach (TipoPerfil item in Enum.GetValues(typeof(TipoPerfil)))
-            {
-                var nomePerfil = EnumHelper<TipoPerfil>.GetDisplayValue(item);
-                var check = "";
+                                    {
+                                        var nomePerfil = EnumHelper<TipoPerfil>.GetDisplayValue(item);
+                                        var check = "";
 
-                if (Model.PESSOAPERFIL.Where(p => p.TIPOPERFIL == item).Count() > 0)
-                {
-                    check = "checked";
-                }
-                else
-                {
-                    check = "";
-                }
+                                        if (Model.PESSOAPERFIL.Where(p => p.TIPOPERFIL == item).Count() > 0)
+                                        {
+                                            check = "checked";
+                                        }
+                                        else
+                                        {
+                                            check = "";
+                                        }
 
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"
-                                       @check
-                                       name="PERFILSELECIONADO"
-                                       value="@item" /> @nomePerfil
-                                </label>
-                            </div>
-}
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox"
+                                                       @check
+                                                       name="PERFILSELECIONADO"
+                                                       value="@item" /> @nomePerfil
+                                                </label>
+                                            </div>
+                                        }
                                 </div>
                             </div>
 
