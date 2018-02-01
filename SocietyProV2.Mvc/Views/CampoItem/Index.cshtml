@@ -5,6 +5,9 @@
 }
 
 <div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -38,7 +41,7 @@
                                 </td>
                                 <td>
                                     <a href="@Url.Action("Edit", "CampoItem" , new { id = item.ID })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
-                                    <a href="@Url.Action("Delete", "CampoItem" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a> 
+                                    <a href="@Url.Action("Delete", "CampoItem" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         }

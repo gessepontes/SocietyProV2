@@ -5,6 +5,9 @@
 }
 
 <div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -28,27 +31,27 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CampoItem.Campo.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.CampoItem.DESCRICAO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.DIASEMANA)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.HORARIO)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.STATUS)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("Edit", "Horario" , new { id = item.ID })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
-                                <a href="@Url.Action("Delete", "Horario" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CampoItem.Campo.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CampoItem.DESCRICAO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DIASEMANA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HORARIO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.STATUS)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Horario" , new { id = item.ID })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Delete", "Horario" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

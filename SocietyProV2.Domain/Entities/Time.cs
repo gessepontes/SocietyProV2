@@ -72,13 +72,16 @@ namespace SocietyProV2.Domain.Entities
         [Required(ErrorMessage = "{0} é um campo obrigatório.")]
         public TipoTime TIPO { get; set; }
 
-        public virtual Pessoa PESSOA { get; set; }
+        public virtual Pessoa Pessoa { get; set; }
 
         [Display(Name = "Jogador")]
         public virtual ICollection<Jogador> Jogador { get; set; }
 
         [Display(Name = "Horário")]
         public virtual ICollection<CampoHorario> CampoHorario { get; set; }
+
+        [Display(Name = "Pré-Inscrição")]
+        public virtual ICollection<PreInscricao> PreInscricao { get; set; }
 
     }
 

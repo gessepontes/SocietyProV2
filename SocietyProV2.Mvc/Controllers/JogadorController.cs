@@ -5,7 +5,6 @@ using Microsoft.Extensions.Configuration;
 using SocietyProV2.Domain.Diversos;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
-using SocietyProV2.Mvc.Models;
 using System;
 
 namespace SocietyProV2.Mvc.Controllers

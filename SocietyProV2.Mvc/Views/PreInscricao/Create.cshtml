@@ -1,0 +1,55 @@
+﻿@model SocietyProV2.Domain.Entities.PreInscricao
+
+@{
+    ViewData["Title"] = "Nova pré-inscrição";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Nova pré-inscrição</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form asp-action="Create" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="IDTime" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDTime"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaTime,"ID", "NOME"))">
+                                        <option value="">Selecione um time</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDTime" class="text-danger"></span>
+                            </div>
+
+                            <input type="hidden" name="idCampeonato" id="idCampeonato" value="@ViewBag.idCampeonato" />
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <a asp-action="Index" asp-route-id="@ViewBag.idCampeonato"  class="btn btn-primary">Voltar</a>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

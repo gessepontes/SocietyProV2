@@ -89,9 +89,9 @@
                                     <a><i class="fa fa-table"></i> Campeonato <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="@Url.Action("Index", "Campeonato")">Campeonato</a></li>
-                                        <li><a href="@Url.Action("Index", "PreInscricao")">Pré-Inscrição</a></li>
-                                        <li><a href="@Url.Action("Index", "Inscricao")">Inscritos</a></li>
-                                        <li><a href="@Url.Action("Index", "Campeonato")">Jogadores</a></li>
+                                        <li><a href="@Url.Action("IndexCampeonato", "PreInscricao")">Pré-Inscrição</a></li>
+                                        <li><a href="@Url.Action("IndexCampeonato", "Inscricao")">Inscrição</a></li>
+                                        <li><a href="@Url.Action("IndexCampeonato", "JogadorInscrito")">Jogadores</a></li>
                                         <li><a href="@Url.Action("Index", "Campeonato")">Bid</a></li>
                                         <li><a href="@Url.Action("Index", "Campeonato")">Grupos</a></li>
                                         <li><a href="@Url.Action("Index", "Campeonato")">Partidas</a></li>
@@ -188,9 +188,6 @@
             <!-- /top navigation -->
             <!-- page content -->
             @RenderBody()
-            <div class="col-md-10 col-sm-6 col-xs-12 col-md-offset-2">
-                @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
-            </div>
 
             <!-- /page content -->
             <!-- footer content -->

@@ -39,6 +39,9 @@ namespace SocietyProV2.Data.Repositories.Common
                     c.AddMap(new AgendarMap());
                     c.AddMap(new CampeonatoMap());
                     c.AddMap(new FotoInforCampeonatoMap());
+                    c.AddMap(new PreInscricaoMap());
+                    c.AddMap(new InscricaoMap());
+                    c.AddMap(new JogadorInscritoMap());
                     c.ForDommel();
                 });
             }
