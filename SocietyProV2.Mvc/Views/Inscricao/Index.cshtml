@@ -43,7 +43,7 @@
                                     @if (item.ID == 0)
                                     {
                                     <form asp-action="Create" class="form-horizontal form-label-left">
-                                        <input type="hidden" id="IDPreInscrito" name="IDPreInscrito" value="@item.IDPreInscrito" />
+                                        <input type="hidden" id="IDPreInscrito" name="IDPreInscrito" value="@item.PreInscricao.ID" />
                                         <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
                                         <button type="submit" class="btn btn-success"><span class="fa fa-plus-square fa-lg"></span></button>
                                     </form>

@@ -5,6 +5,9 @@
 }
 
 <div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
 
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -17,7 +20,7 @@
                     <thead>
                         <tr>
                             <th>Jogadores da partida</th>
-                            <th width="3%"></th>
+                            <th width="5%"></th>
                         </tr>
                     </thead>
 
@@ -28,23 +31,22 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Jogador.NOME)
                                 </td>
-                                <td>
+                                <td align="center">
                                     @if (item.ID == 0)
                                     {
                                         <form asp-action="CreateJogador" class="form-horizontal form-label-left">
                                             <input type="hidden" id="IDJogador" name="IDJogador" value="@item.Jogador.ID" />
-                                            <input type="hidden" id="IDInscrito" name="IDInscrito" value="@item.IDInscrito" />
+                                            <input type="hidden" id="IDInscrito" name="IDInscrito" value="@item.Inscricao.ID" />
                                             <input type="hidden" id="idTime" name="idTime" value="@item.Jogador.IDTIME" />
-                                            <button type="submit" class="btn btn-success"><span class="fa fa-plus-square fa-lg"></span></button>
+                                            <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
+                                            <button type="submit" class="btn btn-success"><span class="fa fa-plus-square"></span></button>
                                         </form>
                                     }
                                     else
                                     {
                                         <form asp-action="DeleteJogador" class="form-horizontal form-label-left">
                                             <input type="hidden" id="id" name="id" value="@item.ID" />
-                                            <input type="hidden" id="idTime" name="idTime" value="@item.Jogador.IDTIME" />
-                                            <button type="submit" class="btn btn-danger"><span class="fa fa-minus-square fa-lg"></span></button>
-                                            <button type="submit" class="btn btn-default"><span class="fa fa-ban fa-lg"></span></button>
+                                            <button type="submit" class="btn btn-danger"><span class="fa fa-minus-square"></span></button>
                                         </form>
                                     }
                                 </td>

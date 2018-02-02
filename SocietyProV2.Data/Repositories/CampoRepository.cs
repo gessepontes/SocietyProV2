@@ -31,17 +31,17 @@ namespace SocietyProV2.Data.Repositories
             conn.Query(sql, new { obj.NOME, obj.ENDERECO, obj.TELEFONE, obj.VALOR, obj.VALORMENSAL, obj.STATUS, obj.DATACADASTRO, obj.SOCIETY, obj.CAMPO11, obj.AGENDAMENTO, obj.LOGO, obj.IDPESSOA, obj.IDCIDADE, obj.ID });
         }
 
-        public IEnumerable<Campo> GetAllCampoDrop(int? iTipo)
+        public IEnumerable<Campo> GetAllCampoDrop(string sTipo = "")
         {
             string parametros = "";
 
-            switch (iTipo)
+            switch (sTipo)
             {
-                case 0:
+                case "SOCIETY":
                     parametros = " AND SOCIETY = 1";
                     break;
-                case 1:
-                    parametros = " AND CAMPO = 1";
+                case "CAMPO11":
+                    parametros = " AND CAMPO11 = 1";
                     break;
                 default:
                     parametros = "";

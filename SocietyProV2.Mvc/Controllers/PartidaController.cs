@@ -37,7 +37,7 @@ namespace SocietyProV2.Mvc.Controllers
         public IActionResult Create()
         {
             ViewBag.ListaTime = _timeRepository.GetAllTimeDrop();
-            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop(0);
+            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace SocietyProV2.Mvc.Controllers
                 return NotFound();
 
             ViewBag.ListaTime = _timeRepository.GetAllTimeDrop();
-            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop(0);
+            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
 
             return View(partida);
         }

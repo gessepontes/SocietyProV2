@@ -282,4 +282,8 @@
     <ProjectReference Include="..\SocietyProV2.IoC\SocietyProV2.IoC.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\fotocampeonato\" />
+  </ItemGroup>
+
 </Project>

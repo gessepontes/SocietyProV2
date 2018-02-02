@@ -6,6 +6,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
 {
     public interface ICampoRepository : IRepositoryBase<Campo>
     {
-        IEnumerable<Campo> GetAllCampoDrop(int? iTipo);
+        IEnumerable<Campo> GetAllCampoDrop(string sTipo = "");
     }
 }

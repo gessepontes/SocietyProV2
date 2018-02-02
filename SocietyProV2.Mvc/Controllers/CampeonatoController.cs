@@ -33,7 +33,7 @@ namespace SocietyProV2.Mvc.Controllers
 
         public IActionResult Create()
         {
-            ViewBag.ListaCampo = _campoRepository.GetAll();
+            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
             ViewBag.ListaPessoa = _pessoaRepository.GetAllPessoaDrop();
 
             return View();
@@ -105,7 +105,7 @@ namespace SocietyProV2.Mvc.Controllers
             if (_campeonato == null)
                 return NotFound();
 
-            ViewBag.ListaCampo = _campoRepository.GetAll();
+            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
             ViewBag.ListaPessoa = _pessoaRepository.GetAllPessoaDrop();
 
             return View(_campeonato);

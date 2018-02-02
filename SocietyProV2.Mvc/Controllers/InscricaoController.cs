@@ -71,20 +71,20 @@ namespace SocietyProV2.Mvc.Controllers
         }
 
         [ValidateAntiForgeryToken]
-        public IActionResult CreateJogador([Bind("IDJogador,IDInscrito,dDataDispensa")] JogadorInscrito _jogadorInscrito, int idTime)
+        public IActionResult CreateJogador([Bind("IDJogador,IDInscrito,dDataDispensa")] JogadorInscrito _jogadorInscrito, int idTime,int idCampeonato)
         {
             if (ModelState.IsValid)
             {
                 _jogadorInscritoRepository.Add(_jogadorInscrito);
                 _flashMessage.Confirmation("Operação realizada com sucesso!");
 
-                return RedirectToAction(nameof(Index), new { id = idTime });
+                return RedirectToAction(nameof(IndexJogador), new { id = idCampeonato, idTime });
             }
 
             return View(_jogadorInscrito);
         }
 
-        public IActionResult DeleteJogador(int id, int idTime)
+        public IActionResult DeleteJogador(int id)
         {
             var _inscricao = _jogadorInscritoRepository.GetById(id);
 
@@ -100,7 +100,7 @@ namespace SocietyProV2.Mvc.Controllers
             }
 
 
-            return RedirectToAction(nameof(Index), new { id = idTime });
+            return RedirectToAction(nameof(IndexJogador), new { id = _inscricao.Inscricao.PreInscricao.IDCampeonato, idTime = _inscricao.Inscricao.PreInscricao.IDTime });
         }
     }
 
