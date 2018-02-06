@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace SocietyProV2.Domain.Entities
 {
@@ -9,5 +9,7 @@ namespace SocietyProV2.Domain.Entities
         public int IDPreInscrito { get; set; }
 
         public virtual PreInscricao PreInscricao { get; set; }
+
+        public virtual ICollection<Grupo> Grupo { get; set; }
     }
 }

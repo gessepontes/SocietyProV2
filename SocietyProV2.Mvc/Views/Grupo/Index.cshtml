@@ -1,0 +1,53 @@
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.Grupo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2> <a asp-action="Create" asp-route-id="@ViewBag.IdCampeonato">Grupo Campeonato</a></h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.Inscricao.PreInscricao.Time.NOME)</th>
+                            <th>@Html.DisplayNameFor(model => model.IDGrupo)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Inscricao.PreInscricao.Time.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDGrupo)
+                                </td>
+                                <td>
+                                    <a href="@Url.Action("Edit", "Grupo" , new { id = item.ID })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Delete", "Grupo" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12 col-sm-6 col-xs-12">
+                <a asp-action="IndexCampeonato" class="btn btn-primary">Voltar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

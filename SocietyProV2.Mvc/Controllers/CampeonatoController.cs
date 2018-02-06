@@ -18,7 +18,9 @@ namespace SocietyProV2.Mvc.Controllers
         private readonly IFlashMessage _flashMessage;
 
 
-        public CampeonatoController(ICampeonatoRepository campeonatoRepository, IFotoInforCampeonatoRepository fotoInforCampeonatoRepository, ICampoRepository campoRepository, IFlashMessage flashMessage,
+        public CampeonatoController(ICampeonatoRepository campeonatoRepository, 
+            IFotoInforCampeonatoRepository fotoInforCampeonatoRepository, 
+            ICampoRepository campoRepository, IFlashMessage flashMessage,
             IPessoaRepository pessoaRepository)
         {
             _campeonatoRepository = campeonatoRepository;

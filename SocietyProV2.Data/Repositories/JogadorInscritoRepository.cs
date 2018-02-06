@@ -71,5 +71,18 @@ namespace SocietyProV2.Data.Repositories
             conn.Execute(sql, new { obj.ID });
         }
 
+        public IEnumerable<JogadorInscrito> BidDetails(int idCampeonato) =>
+    conn.Query<JogadorInscrito, Jogador, Inscricao, Time, JogadorInscrito>(
+        @"SELECT JI.*,J.*,I.*,T.* FROM JogadorInscrito JI INNER JOIN JOGADOR J ON JI.IDJOGADOR = J.ID INNER JOIN Inscrito I ON JI.IDInscrito = I.ID INNER JOIN PreInscrito P ON P.ID = I.IDPreinscrito INNER JOIN TIME T ON J.idTime = T.ID WHERE P.IDCampeonato = @idCampeonato",
+        map: (jogadorInscrito, jogador, inscricao,time) =>
+        {
+            jogadorInscrito.Inscricao = inscricao;
+            jogadorInscrito.Jogador = jogador;
+            jogadorInscrito.Jogador.Time = time;
+
+            return jogadorInscrito;
+        },
+                param: new { idCampeonato });
+
     }
 }

@@ -18,6 +18,15 @@ namespace SocietyProV2.Data.Repositories
             return campeonato;
         });
 
+        public IEnumerable<Campeonato> GetGrupoAll() =>
+            conn.Query<Campeonato, Campo, Campeonato>(
+            @"SELECT * FROM CAMPEONATO C INNER JOIN CAMPO CP ON C.icodcampo = CP.ID WHERE C.iTipoCampeonato = 1",
+            map: (campeonato, campo) =>
+            {
+                campeonato.Campo = campo;
+                return campeonato;
+            });
+
 
         public override Campeonato GetById(int? id) {
             Campeonato result = conn.Query<Campeonato>("SELECT * FROM CAMPEONATO C WHERE C.IDCampeonato = @id", new { id }).FirstOrDefault();

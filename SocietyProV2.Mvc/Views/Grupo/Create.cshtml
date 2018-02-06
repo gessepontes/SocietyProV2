@@ -1,0 +1,68 @@
+﻿@model SocietyProV2.Domain.Entities.Grupo
+@using SocietyProV2.Domain.Entities
+
+@{
+    ViewData["Title"] = "Novo grupo";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Novo Grupo</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+
+                        <form asp-action="Create" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                            <div class="form-group">
+                                <label asp-for="IDInscrito" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDInscrito"
+                                            class="form-control" asp-items="@(new SelectList(ViewBag.ListaTime, "Value", "Text"))">
+                                        <option value="">Selecione um time</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDInscrito" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDGrupo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="IDGrupo"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(IDGrupo))))">
+                                        <option value="">Selecione um grupo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDGrupo" class="text-danger"></span>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Grupo",new { id = ViewBag.IdCampeonato })'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

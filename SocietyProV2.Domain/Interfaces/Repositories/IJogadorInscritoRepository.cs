@@ -6,5 +6,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
 {
     public interface IJogadorInscritoRepository : IRepositoryBase<JogadorInscrito> {
         IEnumerable<JogadorInscrito> GetAll(int idTime, int IDCampeonato);
+        IEnumerable<JogadorInscrito> BidDetails(int idCampeonato);
     }
 }

@@ -7,5 +7,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
     public interface IInscricaoRepository : IRepositoryBase<Inscricao>
     {
         IEnumerable<Inscricao> GetAll(int idCampeoanto);
+        IEnumerable<Inscricao> GetPreInscritoAll(int idCampeoanto);
     }
 }

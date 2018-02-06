@@ -28,7 +28,7 @@ namespace SocietyProV2.Mvc.Controllers
         public IActionResult Index(int id)
         {
             ViewBag.idCampeonato = id;
-            return View(_inscricaoRepository.GetAll(id));
+            return View(_inscricaoRepository.GetPreInscritoAll(id));
         }
 
         public IActionResult IndexJogador(int id, int idTime)

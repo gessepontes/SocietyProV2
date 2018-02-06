@@ -42,6 +42,7 @@ namespace SocietyProV2.Data.Repositories.Common
                     c.AddMap(new PreInscricaoMap());
                     c.AddMap(new InscricaoMap());
                     c.AddMap(new JogadorInscritoMap());
+                    c.AddMap(new GrupoMap());
                     c.ForDommel();
                 });
             }
