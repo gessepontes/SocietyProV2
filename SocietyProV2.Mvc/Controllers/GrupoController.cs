@@ -29,7 +29,7 @@ namespace SocietyProV2.Mvc.Controllers
             ViewBag.IdCampeonato = id;
             return View(_grupoRepository.GetAllByCampeonato(id));
         }
-        
+
         public IActionResult Create(int id)
         {
             ViewBag.IdCampeonato = id;
@@ -40,14 +40,14 @@ namespace SocietyProV2.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("IDGrupo,IDInscrito")] Grupo _grupo)
+        public IActionResult Create([Bind("IDGrupo,IDInscrito")] Grupo _grupo, int id)
         {
             if (ModelState.IsValid)
             {
                 _grupoRepository.Add(_grupo);
                 _flashMessage.Confirmation("Operação realizada com sucesso!");
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id });
             }
 
             return View(_grupo);
@@ -63,12 +63,15 @@ namespace SocietyProV2.Mvc.Controllers
             if (_grupo == null)
                 return NotFound();
 
+            ViewBag.ListaTime = _grupoRepository.GetDropEdit(_grupo.IDInscrito);
+            ViewBag.IdCampeonato = _grupo.Inscricao.PreInscricao.IDCampeonato;
+
             return View(_grupo);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID,IDGrupo,IDInscrito")] Grupo _grupo)
+        public IActionResult Edit(int id, [Bind("ID,IDGrupo,IDInscrito")] Grupo _grupo, int idCampeonato)
         {
             if (id != _grupo.ID)
                 return NotFound();
@@ -89,7 +92,7 @@ namespace SocietyProV2.Mvc.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), new { id = idCampeonato });
             }
 
             return View(_grupo);
@@ -124,7 +127,7 @@ namespace SocietyProV2.Mvc.Controllers
                 _flashMessage.Danger("Este registro não pode ser apagado, o registro possui dependencias!");
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), new { id = _grupo.Inscricao.PreInscricao.IDCampeonato });
         }
 
         private bool GrupoExists(int id) =>

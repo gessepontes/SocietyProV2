@@ -1,4 +1,40 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SocietyProV2.Domain.Entities.Grupo
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+
+    <div class="x_panel">
+        <div class="clearfix"></div>
+        <div class="row">
+            <h3>Você tem certeza que deseja excluir este registro?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Inscricao.PreInscricao.Time.NOME)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Inscricao.PreInscricao.Time.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.IDGrupo)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IDGrupo)
+                </dd>
+            </dl>
+
+            <form asp-action="Delete">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="submit" asp-action="Index" asp-route-id="@Model.Inscricao.PreInscricao.IDCampeonato">Voltar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

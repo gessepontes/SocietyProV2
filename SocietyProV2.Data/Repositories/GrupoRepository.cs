@@ -21,6 +21,19 @@ namespace SocietyProV2.Data.Repositories
                 return grupo;
             });
 
+
+        public override Grupo GetById(int? id) =>
+            conn.Query<Grupo, Inscricao, PreInscricao, Time, Grupo>(
+            @"select TOP(1) * from CampeonatoGrupo CG INNER JOIN Inscrito I ON CG.IDInscrito = I.ID INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN TIME T ON PI.IDTime = T.ID WHERE CG.ID = @id",
+            map: (grupo, inscricao, preinscricao, time) =>
+            {
+                grupo.Inscricao = inscricao;
+                grupo.Inscricao.PreInscricao = preinscricao;
+                grupo.Inscricao.PreInscricao.Time = time;
+                return grupo;
+            },
+            param: new { id }).FirstOrDefault();
+
         public IEnumerable<Grupo> GetAllByCampeonato(int id) =>
             conn.Query<Grupo, Inscricao, PreInscricao, Time, Grupo>(
             @"select * from CampeonatoGrupo CG INNER JOIN Inscrito I ON CG.IDInscrito = I.ID INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN TIME T ON PI.IDTime = T.ID WHERE PI.IDCampeonato = @id ",
@@ -45,7 +58,23 @@ namespace SocietyProV2.Data.Repositories
                 param: new { idCampeoanto }).Select(x => new SelectListItem
                 {
                     Text = x.PreInscricao.Time.NOME.ToUpper(),
-                    Value = x.IDPreInscrito.ToString()
+                    Value = x.ID.ToString()
+                }).ToList().OrderBy(p => p.Text), "Value", "Text");
+
+
+        public SelectList GetDropEdit(int id) =>
+    new SelectList(conn.Query<Inscricao, PreInscricao, Time, Inscricao>(
+        @"SELECT * FROM Inscrito I INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN Time T ON PI.IDTime = T.ID WHERE I.id = @id ",
+        map: (inscricao, preInscricao, time) =>
+        {
+            inscricao.PreInscricao = preInscricao;
+            inscricao.PreInscricao.Time = time;
+            return inscricao;
+        },
+                param: new { id }).Select(x => new SelectListItem
+                {
+                    Text = x.PreInscricao.Time.NOME.ToUpper(),
+                    Value = x.ID.ToString()
                 }).ToList().OrderBy(p => p.Text), "Value", "Text");
     }
 }

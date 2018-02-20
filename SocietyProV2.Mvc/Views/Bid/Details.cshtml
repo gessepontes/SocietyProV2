@@ -18,7 +18,7 @@
                             <th>@Html.DisplayNameFor(model => model.Jogador.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.Jogador.Time.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataCadastro)</th>
-                            <th width="3%"></th>
+                            @*<th width="3%"></th>*@
                         </tr>
                     </thead>
 
@@ -35,9 +35,9 @@
                                 <td>
                                     @Html.ValueFor(modelItem => item.dDataCadastro, "{0:dd/MM/yyyy}")
                                 </td>
-                                <td>
+                                @*<td>
                                     <a href="@Url.Action("DetailsJogador", "Bid" , new { id = item.IDJogador })"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
-                                </td>
+                                </td>*@
                             </tr>
                         }
                     </tbody>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocietyProV2.Domain.Entities
 {
@@ -18,6 +19,7 @@ namespace SocietyProV2.Domain.Entities
 
         public string STATUS { get; set; }
 
+        [Display(Name = "Data de Inscrição")]
         public DateTime? dDataCadastro { get; set; }
         public DateTime? dDataDispensa { get; set; }
 
