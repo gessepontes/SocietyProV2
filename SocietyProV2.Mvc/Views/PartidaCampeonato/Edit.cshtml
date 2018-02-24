@@ -1,4 +1,192 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SocietyProV2.Domain.Entities.PartidaCampeonato
+
+@{
+    ViewData["Title"] = "Editar partida";
+}
+
+<div class="right_col" role="main">
+    <div class="">
+        <div class="clearfix"></div>
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2>Editar Partida</h2>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <br />
+                        <form asp-controller="Partida" asp-action="Edit" class="form-horizontal form-label-left">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <div class="form-group">
+                                <label asp-for="IDCAMPO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDCAMPO" onchange="ListaCampoItem()"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))">
+                                        <option value="">Selecione o campo</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDCAMPO" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDCAMPOITEM" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDCAMPOITEM"
+                                            class="form-control"
+                                            asp-items="@(new SelectList(Enumerable.Empty<SelectListItem>(), "id", "descricao"))">
+                                        <option value="">Selecione o campo item</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDCAMPOITEM" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDInscrito1" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDInscrito1"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaInscrito,"Value", "Text"))">
+                                        <option value="">Selecione um time</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDInscrito1" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="IDInscrito2" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-5 col-sm-6 col-xs-12">
+                                    <select asp-for="IDInscrito2"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaInscrito,"Value", "Text"))">
+                                        <option value="">Selecione um time</option>
+                                    </select>
+                                </div>
+
+                                <span asp-validation-for="IDInscrito2" class="text-danger"></span>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="iRodada" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <select asp-for="iRodada"
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaRodada,"Value", "Text"))"></select>
+                                </div>
+
+                                <span asp-validation-for="iRodada" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="dDataPartida" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="dDataPartida" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="dDataPartida" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="sHoraPartida" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="sHoraPartida" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="sHoraPartida" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iQntGols1" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="iQntGols1" class="form-control col-md-7 col-xs-12" />
+                                </div>
+                                <span asp-validation-for="iQntGols1" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="iQntGols2" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-1 col-sm-6 col-xs-12">
+                                    <input asp-for="iQntGols2" class="form-control col-md-7 col-xs-12" />
+                                </div>
+
+                                <span asp-validation-for="iQntGols2" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="CLASSIFICACAO" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
+                                <div class="col-md-2 col-sm-6 col-xs-12">
+                                    <input asp-for="CLASSIFICACAO" class="col-md-7 col-xs-12" />
+                                </div>
+                            </div>
+
+                            <div class="ln_solid"></div>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "PartidaCampeonato", new { id = ViewBag.idCampeonato})'">Voltar</button>
+                                    <button type="submit" class="btn btn-success">Salvar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script type="text/javascript">
+        $(function () {
+            DatetimePickerHora("#sHoraPartida");
+        });
+    </script>
+
+    <script src="~/js/diversos.js"></script>
+
+    <script type="text/javascript">
+
+        function ListaCampoItem() {
+            var IDCAMPO = $('#IDCAMPO').val();
+
+            if (IDCAMPO == "") {
+                $("#IDCAMPOITEM").html(""); // clear before appending new list
+
+                $("#IDCAMPOITEM").append(
+                    $('<option></option>').val("").html("Selecione o campo item"));
+
+                return false;
+            }
+
+            $.ajax({
+                url: '/PartidaCampeonato/ListaCampoItem',
+                type: "GET",
+                dataType: "JSON",
+                data: { IDCAMPO: IDCAMPO },
+                success: function (itens) {
+                    $("#IDCAMPOITEM").html(""); // clear before appending new list
+
+                    $("#IDCAMPOITEM").append(
+                        $('<option></option>').val("").html("Selecione o campo item"));
+
+
+                    $.each(itens, function (i, item) {
+                        $("#IDCAMPOITEM").append(
+                            $('<option></option>').val(item.id).html(item.descricao));
+                    });
+                },
+                error: function (itens) {
+                    $("#IDCAMPOITEM").html("");
+
+                    $("#IDCAMPOITEM").append(
+                        $('<option></option>').val("").html("Selecione o campo item"));
+                }
+            });
+
+
+        }
+    </script>
+}

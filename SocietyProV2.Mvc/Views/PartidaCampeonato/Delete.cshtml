@@ -1,4 +1,65 @@
-﻿
-@*
-    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model SocietyProV2.Domain.Entities.PartidaCampeonato
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="right_col" role="main">
+
+    <div class="x_panel">
+        <div class="clearfix"></div>
+        <div class="row">
+            <h3>Você tem certeza que deseja excluir este registro?</h3>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.dDataPartida)
+                </dt>
+                <dd>
+                    @Html.ValueFor(model => model.dDataPartida, "{0:dd/MM/yyyy}") -   @Html.DisplayFor(model => model.sHoraPartida)
+                </dd>
+                <dt>
+                    Time Casa
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Inscricao.PreInscricao.Time.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.iQntGols1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.iQntGols1)
+                </dd>
+                <dt>
+                    Time Fora
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Inscricao1.PreInscricao.Time.NOME)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.iQntGols1)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.iQntGols1)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.CLASSIFICACAO)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CLASSIFICACAO)
+                </dd>
+
+            </dl>
+
+            <form asp-action="Delete">
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                        <button class="btn btn-primary" type="submit" asp-action="Index" asp-route-id="@ViewBag.idCampeonato">Voltar</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -75,8 +75,11 @@ namespace SocietyProV2.Mvc.Controllers
             if (_partidaCampeonato == null)
                 return NotFound();
 
-            //ViewBag.ListaPessoa = _pessoaRepository.GetAllPessoaDrop();
-            //ViewBag.ListaCidade = _cidadeRepository.GetAll();
+            ViewBag.idCampeonato = _partidaCampeonato.Inscricao.PreInscricao.IDCampeonato;
+            ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
+            ViewBag.ListaCampoItem = _campoItemRepository.GetAll();
+            ViewBag.ListaInscrito = _inscricaoRepository.GetDropAll(_partidaCampeonato.Inscricao.PreInscricao.IDCampeonato);
+            ViewBag.ListaRodada = Diverso.listaRodada();
 
             return View(_partidaCampeonato);
         }
@@ -118,6 +121,8 @@ namespace SocietyProV2.Mvc.Controllers
             var _partidaCampeonato = _partidaCampeonatoRepository.GetById(id);
             if (_partidaCampeonato == null)
                 return NotFound();
+
+            ViewBag.idCampeonato = _partidaCampeonato.Inscricao.PreInscricao.IDCampeonato;
 
             return View(_partidaCampeonato);
         }
