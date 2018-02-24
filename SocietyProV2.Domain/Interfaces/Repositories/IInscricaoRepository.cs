@@ -1,4 +1,5 @@
-﻿using SocietyProV2.Domain.Entities;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories.Common;
 using System.Collections.Generic;
 
@@ -8,5 +9,8 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
     {
         IEnumerable<Inscricao> GetAll(int idCampeoanto);
         IEnumerable<Inscricao> GetPreInscritoAll(int idCampeoanto);
+        SelectList GetDropAll(int idCampeoanto);
+        SelectList GetDropAllGrupo(int idCampeoanto);
+        SelectList GetDropEditGrupo(int id);
     }
 }

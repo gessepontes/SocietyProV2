@@ -1,8 +1,10 @@
 ﻿using Dapper;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using SocietyProV2.Data.Repositories.Common;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SocietyProV2.Data.Repositories
 {
@@ -36,5 +38,53 @@ namespace SocietyProV2.Data.Repositories
             return inscricao;
         },
                 param: new { idCampeoanto });
+
+
+        public SelectList GetDropAll(int idCampeoanto) =>
+                new SelectList(conn.Query<Inscricao, PreInscricao, Time, Inscricao>(
+                @"SELECT * FROM Inscrito I INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN Time T ON PI.IDTime = T.ID WHERE PI.IDCampeonato = @idCampeoanto",
+                map: (inscricao, preInscricao, time) =>
+                {
+                    inscricao.PreInscricao = preInscricao;
+                    inscricao.PreInscricao.Time = time;
+                    return inscricao;
+                },
+                        param: new { idCampeoanto }).Select(x => new SelectListItem
+                        {
+                            Text = x.PreInscricao.Time.NOME.ToUpper(),
+                            Value = x.ID.ToString()
+                        }).ToList().OrderBy(p => p.Text), "Value", "Text");
+
+
+        public SelectList GetDropAllGrupo(int idCampeoanto) =>
+            new SelectList(conn.Query<Inscricao, PreInscricao, Time, Inscricao>(
+                @"SELECT * FROM Inscrito I INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN Time T ON PI.IDTime = T.ID WHERE PI.IDCampeonato = @idCampeoanto AND I.ID NOT IN (SELECT IDInscrito FROM CampeonatoGrupo) ",
+                map: (inscricao, preInscricao, time) =>
+                {
+                    inscricao.PreInscricao = preInscricao;
+                    inscricao.PreInscricao.Time = time;
+                    return inscricao;
+                },
+                param: new { idCampeoanto }).Select(x => new SelectListItem
+                {
+                    Text = x.PreInscricao.Time.NOME.ToUpper(),
+                    Value = x.ID.ToString()
+                }).ToList().OrderBy(p => p.Text), "Value", "Text");
+
+
+        public SelectList GetDropEditGrupo(int id) =>
+                new SelectList(conn.Query<Inscricao, PreInscricao, Time, Inscricao>(
+                    @"SELECT * FROM Inscrito I INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN Time T ON PI.IDTime = T.ID WHERE I.id = @id ",
+                    map: (inscricao, preInscricao, time) =>
+                    {
+                        inscricao.PreInscricao = preInscricao;
+                        inscricao.PreInscricao.Time = time;
+                        return inscricao;
+                    },
+                            param: new { id }).Select(x => new SelectListItem
+                            {
+                                Text = x.PreInscricao.Time.NOME.ToUpper(),
+                                Value = x.ID.ToString()
+                            }).ToList().OrderBy(p => p.Text), "Value", "Text");
     }
 }

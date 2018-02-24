@@ -4,9 +4,8 @@ using System.Collections.Generic;
 
 namespace SocietyProV2.Domain.Interfaces.Repositories
 {
-    public interface ICampoItemRepository : IRepositoryBase<CampoItem>
+    public interface IPartidaCampeonatoRepository : IRepositoryBase<PartidaCampeonato>
     {
-        IEnumerable<CampoItem> GetAllCampoItemDrop();
-        IEnumerable<CampoItem> GetByIdCampo(int id);
+        IEnumerable<PartidaCampeonato> GetAll(int id);
     }
 }

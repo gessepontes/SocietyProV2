@@ -11,13 +11,15 @@ namespace SocietyProV2.Mvc.Controllers
         private readonly IFlashMessage _flashMessage;
         private readonly IGrupoRepository _grupoRepository;
         private readonly ICampeonatoRepository _campeonatoRepository;
+        private readonly IInscricaoRepository _inscricaoRepository;
 
-        public GrupoController(IGrupoRepository grupoRepository,
+        public GrupoController(IGrupoRepository grupoRepository, IInscricaoRepository inscricaoRepository,
             IFlashMessage flashMessage,
             ICampeonatoRepository campeonatoRepository)
         {
             _flashMessage = flashMessage;
             _grupoRepository = grupoRepository;
+            _inscricaoRepository = inscricaoRepository;
             _campeonatoRepository = campeonatoRepository;
         }
 
@@ -33,7 +35,7 @@ namespace SocietyProV2.Mvc.Controllers
         public IActionResult Create(int id)
         {
             ViewBag.IdCampeonato = id;
-            ViewBag.ListaTime = _grupoRepository.GetDropAll(id);
+            ViewBag.ListaTime = _inscricaoRepository.GetDropAllGrupo(id);
             return View();
         }
 
@@ -63,7 +65,7 @@ namespace SocietyProV2.Mvc.Controllers
             if (_grupo == null)
                 return NotFound();
 
-            ViewBag.ListaTime = _grupoRepository.GetDropEdit(_grupo.IDInscrito);
+            ViewBag.ListaTime = _inscricaoRepository.GetDropEditGrupo(_grupo.IDInscrito);
             ViewBag.IdCampeonato = _grupo.Inscricao.PreInscricao.IDCampeonato;
 
             return View(_grupo);

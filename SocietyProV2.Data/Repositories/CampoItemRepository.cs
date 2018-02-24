@@ -33,5 +33,14 @@ namespace SocietyProV2.Data.Repositories
         {
             return conn.Query<CampoItem>("SELECT CI.ID, (C.NOME + ' - Campo: ' + CI.DESCRICAO) DESCRICAO FROM CAMPOITEM CI INNER JOIN CAMPO C ON CI.IDCAMPO = C.ID ORDER BY NOME").ToList();
         }
+
+        public IEnumerable<CampoItem> GetByIdCampo(int id)
+        {
+            string query;
+
+            query = "SELECT CI.ID, CI.DESCRICAO FROM CAMPOITEM CI WHERE CI.IDCAMPO=@id ORDER BY DESCRICAO";
+
+            return conn.Query<CampoItem>(query, new { id }).ToList();
+        }
     }
 }

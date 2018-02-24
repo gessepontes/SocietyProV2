@@ -11,5 +11,7 @@ namespace SocietyProV2.Domain.Entities
         public virtual PreInscricao PreInscricao { get; set; }
 
         public virtual ICollection<Grupo> Grupo { get; set; }
+
+        public virtual ICollection<PartidaCampeonato> PartidaCampeonato { get; set; }
     }
 }

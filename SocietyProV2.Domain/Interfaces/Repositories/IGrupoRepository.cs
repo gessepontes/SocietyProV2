@@ -7,9 +7,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
 {
     public interface IGrupoRepository : IRepositoryBase<Grupo> {
         IEnumerable<Grupo> GetAllByCampeonato(int id);
-        SelectList GetDropAll(int idCampeoanto);
-        SelectList GetDropEdit(int id);
-
     }
 
 }
