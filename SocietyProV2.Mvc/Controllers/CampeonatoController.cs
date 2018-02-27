@@ -131,7 +131,7 @@ namespace SocietyProV2.Mvc.Controllers
                     }
 
                     _campeonatoRepository.Update(_campeonato);
-
+                    _flashMessage.Confirmation("Operação realizada com sucesso!");
                 }
                 catch (DbUpdateConcurrencyException)
                 {

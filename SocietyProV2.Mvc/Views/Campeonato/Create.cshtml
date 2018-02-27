@@ -18,28 +18,25 @@
                     <div class="x_content">
                         <br />
 
-                        <form enctype="multipart/form-data" asp-action="Create" class="form-horizontal form-label-left">
+                        <form enctype="multipart/form-data" asp-action="Create" class="form-horizontal form-label-left" data-toggle="validator">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
                             <div class="form-group">
                                 <label asp-for="IDPESSOA" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <select asp-for="IDPESSOA"
-                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))">
+                                    <select asp-for="IDPESSOA" 
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaPessoa,"ID", "NOME"))" required>
                                         <option value="">Selecione um responsável</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="IDPESSOA" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="sNome" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
-                                    <input asp-for="sNome" class="form-control col-md-7 col-xs-12" />
+                                    <input asp-for="sNome" class="form-control col-md-7 col-xs-12" required/>
                                 </div>
-                                <span asp-validation-for="sNome" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -47,12 +44,10 @@
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     <select asp-for="TIPO"
                                             class="form-control"
-                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoTime))))">
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoTime))))" required>
                                         <option value="">Selecione o tipo do campeonato</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="TIPO" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -60,12 +55,10 @@
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     <select asp-for="iTipoCampeonato"
                                             class="form-control"
-                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoCampeonato))))">
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoCampeonato))))" required>
                                         <option value="">Selecione o estilo de campeonato</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="iTipoCampeonato" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -73,51 +66,41 @@
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     <select asp-for="iTipoArbitragem"
                                             class="form-control"
-                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoArbitragem))))">
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(TipoArbitragem))))" required>
                                         <option value="">Selecione a regra de arbitragem</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="iTipoArbitragem" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="iCodCampo" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
                                     <select asp-for="iCodCampo"
-                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))">
+                                            class="form-control" asp-items="@(new SelectList(@ViewBag.ListaCampo,"ID", "NOME"))" required>
                                         <option value="">Selecione um campo</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="iCodCampo" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="dDataInicio" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <input asp-for="dDataInicio" class="form-control col-md-7 col-xs-12" />
+                                    <input asp-for="dDataInicio" class="form-control col-md-7 col-xs-12" required/>
                                 </div>
-
-                                <span asp-validation-for="dDataInicio" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="dDataFim" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-2 col-sm-6 col-xs-12">
-                                    <input asp-for="dDataFim" class="form-control col-md-7 col-xs-12" />
+                                    <input asp-for="dDataFim" class="form-control col-md-7 col-xs-12" required/>
                                 </div>
-
-                                <span asp-validation-for="dDataFim" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
                                 <label asp-for="iQuantidadeTimes" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-1 col-sm-6 col-xs-12">
-                                    <input asp-for="iQuantidadeTimes" class="form-control col-md-7 col-xs-12" />
+                                    <input asp-for="iQuantidadeTimes" class="form-control col-md-7 col-xs-12" required/>
                                 </div>
-
-                                <span asp-validation-for="iQuantidadeTimes" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
