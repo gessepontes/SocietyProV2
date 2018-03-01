@@ -20,7 +20,6 @@
                             <th>@Html.DisplayNameFor(model => model.Campo.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataInicio)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataFim)</th>
-                            <th>@Html.DisplayNameFor(model => model.bPreInscricao)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -43,9 +42,6 @@
                         </td>
                         <td>
                             @Html.ValueFor(modelItem => item.dDataFim, "{0:dd/MM/yyyy}")
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.bPreInscricao)
                         </td>
                         <td>
                             <a href="@Url.Action("Index", "Inscricao" , new { id = item.IDCampeonato })"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>

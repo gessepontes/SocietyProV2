@@ -11,7 +11,7 @@ namespace SocietyProV2.Data.Repositories
     {
         public IEnumerable<JogadorInscrito> GetAll(int idTime, int IDCampeonato) =>
             conn.Query<JogadorInscrito, Jogador, Inscricao, JogadorInscrito>(
-                @"SELECT JI.*,J.*, I.* FROM JOGADOR J INNER JOIN (SELECT I.ID,C.dDataInicio,PI.IDTime FROM Inscrito I INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID INNER JOIN Campeonato C ON C.IDCampeonato = pi.IDCampeonato AND PI.IDCampeonato = @IDCampeonato AND PI.IDTime = @idTime) T ON T.IDTime = J.IDTIME INNER JOIN Inscrito I ON T.ID = I.ID LEFT JOIN JogadorInscrito JI ON J.ID = JI.IDJogador AND JI.IDInscrito = I.ID WHERE  J.STATUS = 1 AND (J.DATADISPENSA > T.dDataInicio OR  J.DATADISPENSA = '01/01/1900') AND J.DATACADASTRO <  T.dDataInicio",
+                @"SELECT JI.*,J.*, I.* FROM JOGADOR J INNER JOIN (SELECT I.ID,C.dDataInicio,I.IDTime FROM Inscrito I INNER JOIN Campeonato C ON C.IDCampeonato = I.IDCampeonato AND I.IDCampeonato = @IDCampeonato AND I.IDTime = @idTime) T ON T.IDTime = J.IDTIME INNER JOIN Inscrito I ON T.ID = I.ID LEFT JOIN JogadorInscrito JI ON J.ID = JI.IDJogador AND JI.IDInscrito = I.ID WHERE  J.STATUS = 1 AND (J.DATADISPENSA > T.dDataInicio OR  J.DATADISPENSA = '01/01/1900') AND J.DATACADASTRO <  T.dDataInicio",
                 map: (jogadorInscrito, jogador, inscricao) =>
                 {
                     if (jogadorInscrito == null)
@@ -27,12 +27,11 @@ namespace SocietyProV2.Data.Repositories
 
 
         public override JogadorInscrito GetById(int? id) =>
-    conn.Query<JogadorInscrito, Inscricao, PreInscricao, JogadorInscrito>(
-        @"SELECT TOP(1) * from JogadorInscrito JI INNER JOIN Inscrito I ON JI.IDInscrito = I.ID INNER JOIN PreInscrito PI ON I.IDPreInscrito = PI.ID WHERE JI.ID = @id",
-        map: (jogadorInscrito, inscricao, preinscricao) =>
+    conn.Query<JogadorInscrito, Inscricao, JogadorInscrito>(
+        @"SELECT TOP(1) * from JogadorInscrito JI INNER JOIN Inscrito I ON JI.IDInscrito = I.ID WHERE JI.ID = @id",
+        map: (jogadorInscrito, inscricao) =>
         {
             jogadorInscrito.Inscricao = inscricao;
-            jogadorInscrito.Inscricao.PreInscricao = preinscricao;
             return jogadorInscrito;
         },
                 param: new { id }).FirstOrDefault();
@@ -73,7 +72,7 @@ namespace SocietyProV2.Data.Repositories
 
         public IEnumerable<JogadorInscrito> BidDetails(int idCampeonato) =>
     conn.Query<JogadorInscrito, Jogador, Inscricao, Time, JogadorInscrito>(
-        @"SELECT JI.*,J.*,I.*,T.* FROM JogadorInscrito JI INNER JOIN JOGADOR J ON JI.IDJOGADOR = J.ID INNER JOIN Inscrito I ON JI.IDInscrito = I.ID INNER JOIN PreInscrito P ON P.ID = I.IDPreinscrito INNER JOIN TIME T ON J.idTime = T.ID WHERE P.IDCampeonato = @idCampeonato",
+        @"SELECT JI.*,J.*,I.*,T.* FROM JogadorInscrito JI INNER JOIN JOGADOR J ON JI.IDJOGADOR = J.ID INNER JOIN Inscrito I ON JI.IDInscrito = I.ID INNER JOIN TIME T ON J.idTime = T.ID WHERE I.IDCampeonato = @idCampeonato",
         map: (jogadorInscrito, jogador, inscricao,time) =>
         {
             jogadorInscrito.Inscricao = inscricao;

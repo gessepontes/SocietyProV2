@@ -56,7 +56,7 @@ namespace SocietyProV2.Mvc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=PreInscricao}/{action=IndexCampeonato}/{id?}");
+                    template: "{controller=Inscricao}/{action=IndexCampeonato}/{id?}");
             });
         }
     }

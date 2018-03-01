@@ -18,7 +18,7 @@
                     <div class="x_content">
                         <br />
 
-                        <form asp-action="Create" class="form-horizontal form-label-left">
+                        <form asp-action="Create" class="form-horizontal form-label-left" data-toggle="validator">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
@@ -26,12 +26,10 @@
                                 <label asp-for="IDInscrito" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                                 <div class="col-md-5 col-sm-6 col-xs-12">
                                     <select asp-for="IDInscrito"
-                                            class="form-control" asp-items="@(new SelectList(ViewBag.ListaTime, "Value", "Text"))">
+                                            class="form-control" asp-items="@(new SelectList(ViewBag.ListaTime, "Value", "Text"))" required>
                                         <option value="">Selecione um time</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="IDInscrito" class="text-danger"></span>
                             </div>
 
                             <div class="form-group">
@@ -39,12 +37,10 @@
                                 <div class="col-md-3 col-sm-6 col-xs-12">
                                     <select asp-for="IDGrupo"
                                             class="form-control"
-                                            asp-items="@(new SelectList(Enum.GetValues(typeof(IDGrupo))))">
+                                            asp-items="@(new SelectList(Enum.GetValues(typeof(IDGrupo))))" required>
                                         <option value="">Selecione um grupo</option>
                                     </select>
                                 </div>
-
-                                <span asp-validation-for="IDGrupo" class="text-danger"></span>
                             </div>
 
                             <div class="ln_solid"></div>

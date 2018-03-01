@@ -42,7 +42,6 @@ namespace SocietyProV2.Mvc.Controllers
         {
             ViewBag.idCampeonato = id;
             ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
-            ViewBag.ListaCampoItem = _campoItemRepository.GetAll();
             ViewBag.ListaInscrito = _inscricaoRepository.GetDropAll(id);
             ViewBag.ListaRodada = Diverso.listaRodada();
 
@@ -52,7 +51,7 @@ namespace SocietyProV2.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("IDPreInscrito")] PartidaCampeonato _partidaCampeonato, int idCampeonato)
+        public IActionResult Create([Bind("IDInscrito1,IDInscrito2,iQntGols1,iQntGols2,iRodada,dDataPartida,sHoraPartida,IDCAMPO,IDCAMPOITEM,CLASSIFICACAO")] PartidaCampeonato _partidaCampeonato, int idCampeonato)
         {
             if (ModelState.IsValid)
             {
@@ -65,6 +64,27 @@ namespace SocietyProV2.Mvc.Controllers
             return View(_partidaCampeonato);
         }
 
+        public IActionResult CreateAutomatico(int IDCampeonato)
+        {
+            int iRetorno = _partidaCampeonatoRepository.CreateAutomatico(IDCampeonato);
+
+            if (iRetorno == 1)
+            {
+                _flashMessage.Confirmation("Operação realizada com sucesso!");
+            }
+            else if (iRetorno == 2)
+            {
+                _flashMessage.Warning("Os grupos ja foram geados para este campeonato!");
+            }
+            else if (iRetorno == 3)
+            {
+                _flashMessage.Danger("Erro ao realizar a operação!");
+            }
+
+            return Json("");
+
+        }
+
 
         public IActionResult Edit(int? id)
         {
@@ -75,10 +95,10 @@ namespace SocietyProV2.Mvc.Controllers
             if (_partidaCampeonato == null)
                 return NotFound();
 
-            ViewBag.idCampeonato = _partidaCampeonato.Inscricao.PreInscricao.IDCampeonato;
+            ViewBag.idCampeonato = _partidaCampeonato.Inscricao.IDCampeonato;
             ViewBag.ListaCampo = _campoRepository.GetAllCampoDrop();
-            ViewBag.ListaCampoItem = _campoItemRepository.GetAll();
-            ViewBag.ListaInscrito = _inscricaoRepository.GetDropAll(_partidaCampeonato.Inscricao.PreInscricao.IDCampeonato);
+            ViewBag.ListaCampoItem = _campoItemRepository.GetByIdCampo(_partidaCampeonato.IDCAMPO);
+            ViewBag.ListaInscrito = _inscricaoRepository.GetDropAll(_partidaCampeonato.Inscricao.IDCampeonato);
             ViewBag.ListaRodada = Diverso.listaRodada();
 
             return View(_partidaCampeonato);
@@ -86,7 +106,7 @@ namespace SocietyProV2.Mvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID,NOME,ENDERECO,TELEFONE,VALOR,VALORMENSAL,STATUS,DATACADASTRO,SOCIETY,CAMPO11,AGENDAMENTO,LOGO,IDPESSOA,IDCIDADE")] PartidaCampeonato _partidaCampeonato, int idCampeonato)
+        public IActionResult Edit(int id, [Bind("ID,IDInscrito1,IDInscrito2,iQntGols1,iQntGols2,iRodada,dDataPartida,sHoraPartida,IDCAMPO,IDCAMPOITEM,CLASSIFICACAO")] PartidaCampeonato _partidaCampeonato, int idCampeonato)
         {
             if (id != _partidaCampeonato.ID)
                 return NotFound();
@@ -96,6 +116,7 @@ namespace SocietyProV2.Mvc.Controllers
                 try
                 {
                     _partidaCampeonatoRepository.Update(_partidaCampeonato);
+                    _flashMessage.Confirmation("Operação realizada com sucesso!");
 
                 }
                 catch (Exception)
@@ -107,7 +128,8 @@ namespace SocietyProV2.Mvc.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+
+                return RedirectToAction(nameof(Index), new { id = idCampeonato });
             }
             return View(_partidaCampeonato);
         }
@@ -122,14 +144,12 @@ namespace SocietyProV2.Mvc.Controllers
             if (_partidaCampeonato == null)
                 return NotFound();
 
-            ViewBag.idCampeonato = _partidaCampeonato.Inscricao.PreInscricao.IDCampeonato;
-
             return View(_partidaCampeonato);
         }
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id, int idCampeonato)
+        public IActionResult DeleteConfirmed(int id)
         {
             var _partidaCampeonato = _partidaCampeonatoRepository.GetById(id);
 
@@ -145,7 +165,7 @@ namespace SocietyProV2.Mvc.Controllers
             }
 
 
-            return RedirectToAction(nameof(Index), new { id = idCampeonato });
+            return RedirectToAction(nameof(Index), new { id = _partidaCampeonato.Inscricao.IDCampeonato});
         }
 
         public IActionResult ListaCampoItem(int IDCAMPO) => Json(_campoItemRepository.GetByIdCampo(IDCAMPO));

@@ -39,6 +39,13 @@ namespace SocietyProV2.Mvc.Controllers
             return View();
         }
 
+        public IActionResult CreateAutomatico(int id)
+        {
+            ViewBag.QuantidadeTimes = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 };
+            ViewBag.IDCampeonato = id;
+
+            return PartialView("_CreateAutomatico");
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -55,6 +62,26 @@ namespace SocietyProV2.Mvc.Controllers
             return View(_grupo);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CreateAutomatico(int iQuantidadeTimes, int IDCampeonato)
+        {
+            int iRetorno = _grupoRepository.CreateAutomatico(iQuantidadeTimes, IDCampeonato);
+
+            if (iRetorno == 1) {
+                _flashMessage.Confirmation("Operação realizada com sucesso!");
+            }
+            else if(iRetorno == 2) {
+                _flashMessage.Warning("Os grupos ja foram geados para este campeonato!");
+            }
+            else if(iRetorno == 3) {
+                _flashMessage.Danger("Erro ao realizar a operação!");
+            }
+
+            return RedirectToAction(nameof(Index), new { id = IDCampeonato });
+
+        }
+
 
         public IActionResult Edit(int? id)
         {
@@ -66,7 +93,7 @@ namespace SocietyProV2.Mvc.Controllers
                 return NotFound();
 
             ViewBag.ListaTime = _inscricaoRepository.GetDropEditGrupo(_grupo.IDInscrito);
-            ViewBag.IdCampeonato = _grupo.Inscricao.PreInscricao.IDCampeonato;
+            ViewBag.IdCampeonato = _grupo.Inscricao.IDCampeonato;
 
             return View(_grupo);
         }
@@ -129,7 +156,7 @@ namespace SocietyProV2.Mvc.Controllers
                 _flashMessage.Danger("Este registro não pode ser apagado, o registro possui dependencias!");
             }
 
-            return RedirectToAction(nameof(Index), new { id = _grupo.Inscricao.PreInscricao.IDCampeonato });
+            return RedirectToAction(nameof(Index), new { id = _grupo.Inscricao.IDCampeonato });
         }
 
         private bool GrupoExists(int id) =>

@@ -16,11 +16,9 @@
                     <thead>
                         <tr>
                             <th>@Html.DisplayNameFor(model => model.sNome)</th>
-                            <th>@Html.DisplayNameFor(model => model.iTipoCampeonato)</th>
                             <th>@Html.DisplayNameFor(model => model.Campo.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataInicio)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataFim)</th>
-                            <th>@Html.DisplayNameFor(model => model.bPreInscricao)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -33,9 +31,6 @@
                                     @Html.DisplayFor(modelItem => item.sNome)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.iTipoCampeonato)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelItem => item.Campo.NOME)
                                 </td>
                                 <td>
@@ -45,10 +40,8 @@
                                     @Html.ValueFor(modelItem => item.dDataFim, "{0:dd/MM/yyyy}")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.bPreInscricao)
-                                </td>
-                                <td>
                                     <a href="@Url.Action("Index", "Grupo" , new { id = item.IDCampeonato })"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
+                                    <a href="@Url.Action("CreateAutomatico", "Grupo" , new { id = item.IDCampeonato })" class="modal-link"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i></a>
                                 </td>
                             </tr>
                         }
@@ -58,8 +51,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 

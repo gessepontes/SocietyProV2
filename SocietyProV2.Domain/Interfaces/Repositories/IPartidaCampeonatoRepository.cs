@@ -7,5 +7,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
     public interface IPartidaCampeonatoRepository : IRepositoryBase<PartidaCampeonato>
     {
         IEnumerable<PartidaCampeonato> GetAll(int id);
+        int CreateAutomatico(int IDCampeonato);
     }
 }

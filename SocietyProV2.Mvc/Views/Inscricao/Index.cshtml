@@ -12,7 +12,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h4>Lista de times inscritos ou para inscrição</h4>
+                <h2> <a asp-action="Create" asp-route-id="@ViewBag.idCampeonato">Nova Inscrição</a></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -31,31 +31,31 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PreInscricao.Time.NOME)
+                                    @Html.DisplayFor(modelItem => item.Time.NOME)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PreInscricao.Time.Pessoa.NOME)
+                                    @Html.DisplayFor(modelItem => item.Time.Pessoa.NOME)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PreInscricao.Time.Pessoa.TELEFONE)
+                                    @Html.DisplayFor(modelItem => item.Time.Pessoa.TELEFONE)
                                 </td>
                                 <td>
-                                    @if (item.ID == 0)
+                                    @if (item.bAtivo)
                                     {
-                                    <form asp-action="Create" class="form-horizontal form-label-left">
-                                        <input type="hidden" id="IDPreInscrito" name="IDPreInscrito" value="@item.PreInscricao.ID" />
-                                        <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
-                                        <button type="submit" class="btn btn-success"><span class="fa fa-plus-square fa-lg"></span></button>
-                                    </form>
+                                        <form asp-action="Delete" class="form-horizontal form-label-left">
+                                            <input type="hidden" id="id" name="id" value="@item.ID" />
+                                            <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
+                                            <button type="submit" class="btn btn-danger"><span class="fa fa-minus-square fa-lg"></span></button>
+                                            <a href="@Url.Action("IndexJogador", "Inscricao" , new { id = item.IDCampeonato , idTime = item.IDTime })" class="btn btn-primary"><i class="fa fa-address-card fa-lg" aria-hidden="true"></i></a>
+                                        </form>
                                     }
                                     else
                                     {
-                                    <form asp-action="Delete" class="form-horizontal form-label-left">
-                                        <input type="hidden" id="id" name="id" value="@item.ID" />
-                                        <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
-                                        <button type="submit" class="btn btn-danger"><span class="fa fa-minus-square fa-lg"></span></button>
-                                        <a href="@Url.Action("IndexJogador", "Inscricao" , new { id = item.PreInscricao.IDCampeonato , idTime = item.PreInscricao.IDTime })" class="btn btn-primary"><i class="fa fa-address-card fa-lg" aria-hidden="true"></i></a>
-                                    </form>
+                                        <form asp-action="Ativar" class="form-horizontal form-label-left">
+                                            <input type="hidden" id="id" name="id" value="@item.ID" />
+                                            <input type="hidden" id="idCampeonato" name="idCampeonato" value="@ViewBag.idCampeonato" />
+                                            <button type="submit" class="btn btn-success"><span class="fa fa-check-square fa-lg"></span></button>
+                                        </form>
                                     }
                                 </td>
                             </tr>
@@ -67,7 +67,7 @@
 
         <div class="form-group">
             <div class="col-md-12 col-sm-6 col-xs-12">
-                <a asp-action="IndexCampeonato"  class="btn btn-primary">Voltar</a>
+                <a asp-action="IndexCampeonato" class="btn btn-primary">Voltar</a>
             </div>
         </div>
     </div>

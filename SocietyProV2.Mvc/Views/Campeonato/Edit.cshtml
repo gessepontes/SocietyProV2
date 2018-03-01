@@ -161,22 +161,22 @@
 
                                         <tbody>
                                             @foreach (var item in Model.FotoInforCampeonato)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.NOME)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ISEQUENCIA)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.FOTO)
-                            </td>
-                            <td>
-                                <a href="@Url.Action("DeleteConfirmedInfor", "Campeonato" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
-                            </td>
-                        </tr>
-}
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.NOME)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ISEQUENCIA)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.FOTO)
+                                                    </td>
+                                                    <td>
+                                                        <a href="@Url.Action("DeleteConfirmedInfor", "Campeonato" , new { id = item.ID })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
+                                                    </td>
+                                                </tr>
+                                            }
                                         </tbody>
                                     </table>
                                 </div>

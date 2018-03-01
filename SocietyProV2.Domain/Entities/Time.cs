@@ -80,8 +80,8 @@ namespace SocietyProV2.Domain.Entities
         [Display(Name = "Horário")]
         public virtual ICollection<CampoHorario> CampoHorario { get; set; }
 
-        [Display(Name = "Pré-Inscrição")]
-        public virtual ICollection<PreInscricao> PreInscricao { get; set; }
+        [Display(Name = "Inscrição")]
+        public virtual ICollection<Inscricao> Inscricao { get; set; }
 
     }
 

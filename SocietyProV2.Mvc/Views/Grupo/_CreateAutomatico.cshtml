@@ -1,0 +1,36 @@
+﻿<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">
+        <span aria-hidden="true">×</span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Informações do campeonato</h4>
+</div>
+<div class="modal-body">
+    <form asp-action="CreateAutomatico" class="form-horizontal form-label-left">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <input type="hidden" value="@ViewBag.IDCampeonato" id="IDCampeonato" name="IDCampeonato" />
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Quantidade de times por grupo</label>
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                @Html.DropDownList("iQuantidadeTimes",
+                     new SelectList(ViewBag.QuantidadeTimes),
+                     new { @class = "form-control", style = "width:100px" })
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+        </div>
+
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#approve-btn').click(function () {
+            $('#modal-container').modal('hide');
+        });
+    });
+</script>
