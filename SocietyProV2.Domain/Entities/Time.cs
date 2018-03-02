@@ -93,4 +93,50 @@ namespace SocietyProV2.Domain.Entities
         Campo = 1
     }
 
+    public class TimeClassificacao
+    {
+
+        public int IDInscrito { get; set; }
+
+        [Display(Name = "Pontuação")]
+        public int Pontuacao { get; set; }
+
+        [Display(Name = "Vitoria")]
+        public int Vitoria { get; set; }
+
+        [Display(Name = "Derrota")]
+        public int Derrota { get; set; }
+
+        [Display(Name = "Empate")]
+        public int Empate { get; set; }
+
+        [Display(Name = "Gols P")]
+        public int GolP { get; set; }
+
+        [Display(Name = "Gols C")]
+        public int GolC { get; set; }
+
+        [Display(Name = "Saldo")]
+        public int Saldo { get; set; }
+
+        string sNome;
+        [Display(Name = "Time")]
+        public string NOME
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(sNome))
+                {
+                    return sNome;
+                }
+                return Diverso.FirstCharToUpper(sNome);
+            }
+            set
+            {
+                sNome = value;
+            }
+
+        }
+    }
+
 }

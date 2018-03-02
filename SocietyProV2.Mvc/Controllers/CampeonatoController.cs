@@ -18,9 +18,9 @@ namespace SocietyProV2.Mvc.Controllers
         private readonly IFlashMessage _flashMessage;
 
 
-        public CampeonatoController(ICampeonatoRepository campeonatoRepository, 
-            IFotoInforCampeonatoRepository fotoInforCampeonatoRepository, 
-            ICampoRepository campoRepository, IFlashMessage flashMessage,
+        public CampeonatoController(ICampeonatoRepository campeonatoRepository,
+            IFotoInforCampeonatoRepository fotoInforCampeonatoRepository,
+            ICampoRepository campoRepository, IFlashMessage flashMessage, 
             IPessoaRepository pessoaRepository)
         {
             _campeonatoRepository = campeonatoRepository;
@@ -91,7 +91,7 @@ namespace SocietyProV2.Mvc.Controllers
 
                 _fotoInforCampeonatoRepository.Add(_campeonatoInfor);
 
-                return RedirectToAction(nameof(Edit),new { id = _campeonatoInfor.IDCAMPEONATO });
+                return RedirectToAction(nameof(Edit), new { id = _campeonatoInfor.IDCAMPEONATO });
             }
 
             return View(_campeonatoInfor);
@@ -182,6 +182,17 @@ namespace SocietyProV2.Mvc.Controllers
             _flashMessage.Confirmation("Operação realizada com sucesso!");
 
             return RedirectToAction(nameof(Edit), new { id = _campeonatoInfor.IDCAMPEONATO });
+        }
+
+        public IActionResult Classificacao(int id, int? IDGrupo)
+        {
+            ViewBag.Campeonato = _campeonatoRepository.GetById(id);
+            return View(_campeonatoRepository.Classificacao(id, IDGrupo));
+        }
+
+        public IActionResult Artilharia(int id)
+        {
+            return View();
         }
 
         private bool CampeonatoExists(int id) =>

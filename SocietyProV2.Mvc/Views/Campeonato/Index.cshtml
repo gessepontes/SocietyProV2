@@ -52,7 +52,10 @@
                                     @Html.DisplayFor(modelItem => item.bPreInscricao)
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Edit", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Classificacao", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i></a> | 
+                                    <a href="@Url.Action("Artilharia", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i></a> | 
+
+                                    <a href="@Url.Action("Edit", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> | 
                                     <a href="@Url.Action("Delete", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                                 </td>
                             </tr>

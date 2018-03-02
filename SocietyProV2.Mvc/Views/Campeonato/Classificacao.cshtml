@@ -1,0 +1,120 @@
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.TimeClassificacao>
+@using SocietyProV2.Domain.Entities
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="right_col" role="main">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
+    </div>
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Classificação - @ViewBag.Campeonato.sNome</h2>
+                <div class="clearfix"></div>
+            </div>
+
+            @if (ViewBag.Campeonato.iTipoCampeonato == TipoCampeonato.Grupos)
+            {
+                <div class="form-group">
+                    <label class="control-label col-md-1 col-sm-3 col-xs-12">Grupo</label>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <select id="IDGrupo" name="IDGrupo"
+                                class="form-control"
+                                asp-items="@(new SelectList(Enum.GetValues(typeof(IDGrupo))))">
+                            <option value="">Selecione um grupo</option>
+                        </select>
+                    </div>
+                </div>
+
+            }
+
+
+            <div class="x_content">
+                <table id="datatable" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.NOME)</th>
+                            <th>@Html.DisplayNameFor(model => model.Pontuacao)</th>
+                            <th>@Html.DisplayNameFor(model => model.Vitoria)</th>
+                            <th>@Html.DisplayNameFor(model => model.Derrota)</th>
+                            <th>@Html.DisplayNameFor(model => model.Empate)</th>
+                            <th>@Html.DisplayNameFor(model => model.GolP)</th>
+                            <th>@Html.DisplayNameFor(model => model.GolC)</th>
+                            <th>@Html.DisplayNameFor(model => model.Saldo)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NOME)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Pontuacao)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Vitoria)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Derrota)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Empate)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GolP)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GolC)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Saldo)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <button class="btn btn-primary" type="button" onclick="location.href='@Url.Action("Index", "Campeonato")'">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $('#datatable').DataTable({
+            "paging": false,
+            "ordering": false,
+            "language": {
+                "lengthMenu": "Mostrar _MENU_ registros por página",
+                "zeroRecords": "Nada encontrado - desculpe",
+                "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                "infoEmpty": "Nenhum registro disponível",
+                "infoFiltered": "(filtrado de _MAX_ registros totais)",
+                "search": "Buscar:",
+                "paginate": {
+                    "first": "Primeiro",
+                    "last": "Último",
+                    "next": "Próximo",
+                    "previous": "Anterior"
+                }
+            }
+        });
+    </script>
+}
+
+

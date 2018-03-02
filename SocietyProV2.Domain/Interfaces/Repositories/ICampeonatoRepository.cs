@@ -7,5 +7,6 @@ namespace SocietyProV2.Domain.Interfaces.Repositories
     public interface ICampeonatoRepository : IRepositoryBase<Campeonato>
     {
         IEnumerable<Campeonato> GetGrupoAll();
+        IEnumerable<TimeClassificacao> Classificacao(int idCampeonato, int? IDGrupo);
     }
 }

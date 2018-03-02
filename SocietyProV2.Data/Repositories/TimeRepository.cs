@@ -7,7 +7,8 @@ using System.Linq;
 
 namespace SocietyProV2.Data.Repositories
 {
-    public class TimeRepository : RepositoryBase<Time>, ITimeRepository{
+    public class TimeRepository : RepositoryBase<Time>, ITimeRepository
+    {
         public IEnumerable<Time> GetAllTimeDrop()
         {
             return conn.Query<Time>("SELECT ID,NOME FROM dbo.Time WHERE STATUS =1 ORDER BY NOME").ToList();
@@ -34,7 +35,9 @@ namespace SocietyProV2.Data.Repositories
 
             sql = "UPDATE TIME SET NOME=@NOME,IDPESSOA=@IDPESSOA,OBSERVACAO=@OBSERVACAO,DATAFUNDACAO=@DATAFUNDACAO,ATIVO=@ATIVO,TIPO=@TIPO" + parametros + " WHERE ID = @ID; ";
 
-            conn.Query(sql, new { obj.NOME, obj.IDPESSOA, obj.OBSERVACAO, obj.DATAFUNDACAO, obj.SIMBOLO, obj.ATIVO, obj.TIPO,obj.ID });
+            conn.Query(sql, new { obj.NOME, obj.IDPESSOA, obj.OBSERVACAO, obj.DATAFUNDACAO, obj.SIMBOLO, obj.ATIVO, obj.TIPO, obj.ID });
         }
+
+
     }
 }
