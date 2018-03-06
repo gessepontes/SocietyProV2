@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SocietyProV2.Data.Repositories.Common;
+using SocietyProV2.Domain.Diversos;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
 using System.Collections.Generic;
@@ -37,12 +38,12 @@ namespace SocietyProV2.Data.Repositories
 
         }
 
-        public IEnumerable<TimeClassificacao> Classificacao(int idCampeonato, int? IDGrupo)
+        public IEnumerable<TimeClassificacao> Classificacao(int idCampeonato, IDGrupo? IDGrupo)
         {
             string sql = "";
             string parametros = "";
 
-            if (IDGrupo != 0) parametros = parametros + ",SIMBOLO=@SIMBOLO";
+            if (IDGrupo != null) parametros = parametros + "INNER JOIN CampeonatoGrupo cg ON cg.IDInscrito = i.id AND cg.IDGrupo = @IDGrupo";
 
             sql = "SELECT i.ID,t.NOME,((select ISNULL(SUM(CASE WHEN pc.iQntGols1 > pc.iQntGols2 THEN 3 WHEN pc.iQntGols1 = pc.iQntGols2 THEN 1 ELSE 0 END),0) " +
                 "FROM PartidaCampeonato pc WHERE IDInscrito1 = i.ID AND pc.CLASSIFICACAO = 1) +(select ISNULL(SUM(CASE WHEN pc.iQntGols1 < pc.iQntGols2 THEN 3 WHEN pc.iQntGols1 = pc.iQntGols2 THEN 1 ELSE 0 END), 0) " +
@@ -59,9 +60,21 @@ namespace SocietyProV2.Data.Repositories
                 "((select ISNULL(SUM(pc.iQntGols2), 0) FROM PartidaCampeonato pc WHERE IDInscrito1 = i.ID AND pc.CLASSIFICACAO = 1) +(select ISNULL(SUM(pc.iQntGols1), 0) FROM PartidaCampeonato pc WHERE IDInscrito2 = i.ID AND pc.CLASSIFICACAO = 1)) GolC," +
                 "(((select ISNULL(SUM(pc.iQntGols1), 0) FROM PartidaCampeonato pc WHERE IDInscrito1 = i.ID AND pc.CLASSIFICACAO = 1) +(select ISNULL(SUM(pc.iQntGols2), 0) " +
                 "FROM PartidaCampeonato pc WHERE IDInscrito2 = i.ID AND pc.CLASSIFICACAO = 1)) -((select ISNULL(SUM(pc.iQntGols2), 0) FROM PartidaCampeonato pc WHERE IDInscrito1 = i.ID AND pc.CLASSIFICACAO = 1) +(select ISNULL(SUM(pc.iQntGols1), 0) " +
-                "FROM PartidaCampeonato pc WHERE IDInscrito2 = i.ID AND pc.CLASSIFICACAO = 1))) Saldo FROM Inscrito i INNER JOIN TIME t ON t.ID = i.IDTime WHERE i.IDCampeonato = @idCampeonato ORDER BY Pontuacao DESC, Vitoria DESC,Saldo DESC, GolP  DESC";
+                "FROM PartidaCampeonato pc WHERE IDInscrito2 = i.ID AND pc.CLASSIFICACAO = 1))) Saldo FROM Inscrito i INNER JOIN TIME t ON t.ID = i.IDTime "  + parametros + " WHERE i.IDCampeonato = @idCampeonato ORDER BY Pontuacao DESC, Vitoria DESC,Saldo DESC, GolP  DESC";
 
             return conn.Query<TimeClassificacao>(sql, new { idCampeonato, IDGrupo });
+        }
+
+        public IEnumerable<JogadorArtilharia> Artilharia(int idCampeonato)
+        {
+            string sql = "";
+
+            sql = "SELECT j.ID,j.NOME,t.NOME NOMETIME,SUM(gc.iQuantidade) Gol FROM golCampeonato gc INNER JOIN JogadorSumula jc ON gc.iCodJogadorSumula = jc.id  " +
+                "INNER JOIN JogadorInscrito ji ON jc.IDJogadorInscrito = ji.ID INNER JOIN Inscrito i ON i.ID = ji.IDInscrito AND i.IDCampeonato = @idCampeonato  " +
+                "INNER JOIN TIME t ON i.IDTime = t.ID INNER JOIN JOGADOR j ON j.ID = ji.IDJogador GROUP BY j.ID,j.NOME,t.NOME " +
+                "HAVING SUM(gc.iQuantidade) > 0 ORDER BY SUM(gc.iQuantidade) DESC";
+
+            return conn.Query<JogadorArtilharia>(sql, new { idCampeonato });
         }
     }
 }

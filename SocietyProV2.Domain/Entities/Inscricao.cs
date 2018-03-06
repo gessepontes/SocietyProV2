@@ -28,6 +28,8 @@ namespace SocietyProV2.Domain.Entities
 
         public virtual ICollection<Grupo> Grupo { get; set; }
 
+        public virtual ICollection<JogadorInscrito> JogadorInscrito { get; set; }
+        
         public virtual ICollection<PartidaCampeonato> PartidaCampeonato { get; set; }
     }
 }

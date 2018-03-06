@@ -28,6 +28,7 @@ namespace SocietyProV2.IoC
             services.AddScoped<IJogadorInscritoRepository, JogadorInscritoRepository>();
             services.AddScoped<IGrupoRepository, GrupoRepository>();
             services.AddScoped<IPartidaCampeonatoRepository, PartidaCampeonatoRepository>();
+            services.AddScoped<ICartaoRepository, CartaoRepository>();
         }
 
     }

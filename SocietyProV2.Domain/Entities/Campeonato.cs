@@ -87,22 +87,4 @@ namespace SocietyProV2.Domain.Entities
 
         public virtual ICollection<FotoInforCampeonato> FotoInforCampeonato { get; set; }
     }
-
-    public enum TipoCampeonato : int
-    {
-        Grupos = 1,
-        [Display(Name = "Mata-Mata")]
-        MataMata = 2,
-        [Display(Name = "Pontos Corridos")]
-        PontosCorridos = 3
-    }
-
-
-    public enum TipoArbitragem : int
-    {
-        [Display(Name = "Society")]
-        Society = 1,
-        [Display(Name = "Campo de 11")]
-        Campo = 2
-    }
 }

@@ -1,4 +1,5 @@
-﻿using SocietyProV2.Domain.Entities;
+﻿using SocietyProV2.Domain.Diversos;
+using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories.Common;
 using System;
 using System.Collections.Generic;

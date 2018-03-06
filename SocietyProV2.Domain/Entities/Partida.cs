@@ -86,14 +86,4 @@ namespace SocietyProV2.Domain.Entities
         public virtual ICollection<JogadorPartida> JogadorPartida { get; set; }
 
     }
-
-    public enum StatusP : int
-    {
-        [Display(Name = "Pendente")]
-        Pendente = 0,
-        [Display(Name = "Aprovado")]
-        Aprovado = 1,
-        [Display(Name = "Cancelado")]
-        Cancelado = 2
-    }
 }

@@ -24,7 +24,6 @@
                             <th>@Html.DisplayNameFor(model => model.Campo.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataInicio)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataFim)</th>
-                            <th>@Html.DisplayNameFor(model => model.bPreInscricao)</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -49,13 +48,12 @@
                                     @Html.ValueFor(modelItem => item.dDataFim, "{0:dd/MM/yyyy}")
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.bPreInscricao)
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Classificacao", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i></a> | 
-                                    <a href="@Url.Action("Artilharia", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i></a> | 
+                                    <a href="@Url.Action("Classificacao", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Artilharia", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Index", "Cartao" , new { id = item.IDCampeonato })"><i class="fa fa-square fa-lg" aria-hidden="true"></i></a> |
+                                    <a href="@Url.Action("Suspenso", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-times-circle fa-lg" aria-hidden="true"></i></a> |
 
-                                    <a href="@Url.Action("Edit", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> | 
+                                    <a href="@Url.Action("Edit", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-pencil-square-o fa-lg" aria-hidden="true"></i></a> |
                                     <a href="@Url.Action("Delete", "Campeonato" , new { id = item.IDCampeonato })"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
                                 </td>
                             </tr>

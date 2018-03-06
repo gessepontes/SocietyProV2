@@ -118,21 +118,4 @@ namespace SocietyProV2.Domain.Entities
 
 
     }
-
-    public enum TipoPerfil : int
-    {
-        [Display(Name = "Administrador")]
-        Administrador = 0,
-        [Display(Name = "Usuário")]
-        Usuario = 1,
-        [Display(Name = "Administrador do campeonato")]
-        AdministradorCampeonato = 2,
-        [Display(Name = "Arbitro")]
-        Arbitro = 3,
-        [Display(Name = "Jogador")]
-        Jogador = 4,
-        [Display(Name = "Administrador do campo")]
-        AdministradorCampo = 5
-    }
-
 }

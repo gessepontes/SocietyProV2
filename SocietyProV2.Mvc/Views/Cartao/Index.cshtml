@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SocietyProV2.Domain.Entities.PartidaCampeonato>
+﻿@model IEnumerable<SocietyProV2.Domain.Entities.Cartao>
 
 @{
     ViewData["Title"] = "Index";
@@ -6,26 +6,21 @@
 
 <div class="right_col" role="main">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        @Vereyon.Web.FlashMessageHtmlHelper.RenderFlashMessages(Html)
-    </div>
-
-    <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2> <a asp-action="Create" asp-route-id="@ViewBag.idCampeonato">Nova Partida</a></h2>
+                <h2>Cartões do Campeonato - @ViewBag.Campeonato.sNome</h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <table id="datatable-responsive" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>@Html.DisplayNameFor(model => model.Inscricao.Time.NOME)</th>
-                            <th>@Html.DisplayNameFor(model => model.iQntGols1)</th>
-                            <th>@Html.DisplayNameFor(model => model.iQntGols2)</th>
+                            <th>@Html.DisplayNameFor(model => model.IDJogadorSumula)</th>
+                            <th>@Html.DisplayNameFor(model => model.iTipoCartao)</th>
+                            @*<th>@Html.DisplayNameFor(model => model.iQntGols2)</th>
                             <th>@Html.DisplayNameFor(model => model.Inscricao1.Time.NOME)</th>
                             <th>@Html.DisplayNameFor(model => model.dDataPartida)</th>
-                            <th>@Html.DisplayNameFor(model => model.iRodada)</th>
-                            <th></th>
+                            <th>@Html.DisplayNameFor(model => model.iRodada)</th>*@
                         </tr>
                     </thead>
 
@@ -34,12 +29,12 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Inscricao.Time.NOME)
+                                    @Html.DisplayFor(modelItem => item.IDJogadorSumula)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.iQntGols1)
+                                    @Html.DisplayFor(modelItem => item.iTipoCartao)
                                 </td>
-                                <td>
+                                @*<td>
                                     @Html.DisplayFor(modelItem => item.iQntGols2)
                                 </td>
                                 <td>
@@ -50,12 +45,7 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.iRodada)
-                                </td>
-                                <td>
-                                    <a href="@Url.Action("Edit", "PartidaCampeonato" , new { id = item.ID})"><i class="fa fa-pencil-square-o fa-lg"></i></a> | 
-                                    <a href="@Url.Action("Delete", "PartidaCampeonato" , new { id = item.ID})"><i class="fa fa-trash fa-lg"></i></a> | 
-                                    <a href="@Url.Action("Sumula", "PartidaCampeonato" , new { id = item.ID })"><i class="fa fa-pencil-square fa-lg" aria-hidden="true"></i></a> 
-                                </td>
+                                </td>*@
                             </tr>
                         }
                     </tbody>
@@ -65,7 +55,7 @@
 
         <div class="form-group">
             <div class="col-md-12 col-sm-6 col-xs-12">
-                <a asp-action="IndexCampeonato" class="btn btn-primary">Voltar</a>
+                <a asp-action="Index" asp-controller="Campeonato" class="btn btn-primary">Voltar</a>
             </div>
         </div>
     </div>

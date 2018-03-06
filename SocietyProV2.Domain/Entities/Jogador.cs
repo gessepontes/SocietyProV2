@@ -81,23 +81,50 @@ namespace SocietyProV2.Domain.Entities
 
     }
 
-    public enum Posicao : int
+
+    public class JogadorArtilharia
     {
-        [Display(Name = "Goleiro")]
-        Goleiro = 0,
-        [Display(Name = "Zagueiro")]
-        Zagueiro = 1,
-        [Display(Name = "Volante")]
-        Volante = 2,
-        [Display(Name = "Meio-Campo")]
-        MeioCampo = 3,
-        [Display(Name = "Atacante")]
-        Atacante = 4,
-        [Display(Name = "Chupa-Sangue")]
-        ChupaSangue = 5,
-        [Display(Name = "Matador")]
-        Matador = 6,
-        [Display(Name = "Lateral")]
-        Lateral = 7
+        public int ID { get; set; }
+
+        [Display(Name = "Gol")]
+        public int Gol { get; set; }
+
+        string sNome;
+        [Display(Name = "Nome")]
+        public string NOME
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(sNome))
+                {
+                    return sNome;
+                }
+                return Diverso.FirstCharToUpper(sNome);
+            }
+            set
+            {
+                sNome = value;
+            }
+
+        }
+
+        string sNomeTime;
+        [Display(Name = "Time")]
+        public string NOMETIME
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(sNomeTime))
+                {
+                    return sNomeTime;
+                }
+                return Diverso.FirstCharToUpper(sNomeTime);
+            }
+            set
+            {
+                sNomeTime = value;
+            }
+
+        }
     }
 }

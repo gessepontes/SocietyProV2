@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SocietyProV2.Domain.Diversos;
+using System.ComponentModel.DataAnnotations;
 
 namespace SocietyProV2.Domain.Entities
 {

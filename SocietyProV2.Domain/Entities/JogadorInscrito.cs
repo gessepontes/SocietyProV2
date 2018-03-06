@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocietyProV2.Domain.Entities
@@ -22,6 +23,8 @@ namespace SocietyProV2.Domain.Entities
         [Display(Name = "Data de Inscrição")]
         public DateTime? dDataCadastro { get; set; }
         public DateTime? dDataDispensa { get; set; }
+
+        public virtual ICollection<JogadorPartidaCampeonato> JogadorPartidaCampeonato { get; set; }
 
         public virtual Inscricao Inscricao { get; set; }
 

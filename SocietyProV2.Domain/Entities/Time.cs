@@ -85,13 +85,6 @@ namespace SocietyProV2.Domain.Entities
 
     }
 
-    public enum TipoTime : int
-    {
-        [Display(Name = "Society")]
-        Society = 0,
-        [Display(Name = "Campo de 11")]
-        Campo = 1
-    }
 
     public class TimeClassificacao
     {

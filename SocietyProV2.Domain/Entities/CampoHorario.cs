@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocietyProV2.Domain.Diversos;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocietyProV2.Domain.Entities
@@ -46,23 +47,5 @@ namespace SocietyProV2.Domain.Entities
         [Display(Name = "Time")]
         public virtual Time Time { get; set; }
 
-    }
-
-    public enum DiaSemana : int
-    {
-        [Display(Name = "Segunda-feira")]
-        Segunda = 1,
-        [Display(Name = "Terça-feira")]
-        Terça = 2,
-        [Display(Name = "Quarta-feira")]
-        Quarta = 3,
-        [Display(Name = "Quinta-feira")]
-        Quinta = 4,
-        [Display(Name = "Sexta-feira")]
-        Sexta = 5,
-        [Display(Name = "Sabado")]
-        Sabado = 6,
-        [Display(Name = "Domingo")]
-        Domingo = 0
     }
 }

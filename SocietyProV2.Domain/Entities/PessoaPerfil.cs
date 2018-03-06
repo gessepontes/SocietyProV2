@@ -1,4 +1,6 @@
-﻿namespace SocietyProV2.Domain.Entities
+﻿using SocietyProV2.Domain.Diversos;
+
+namespace SocietyProV2.Domain.Entities
 {
     public class PessoaPerfil
     {

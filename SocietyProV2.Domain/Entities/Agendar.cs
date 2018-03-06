@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SocietyProV2.Domain.Diversos;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace SocietyProV2.Domain.Entities
@@ -51,21 +52,5 @@ namespace SocietyProV2.Domain.Entities
         public DateTime? DATACANCELAMENTO { get; set; }
         public int? IDPESSOACANCELAMENTO { get; set; }
         public bool MARCADOAPP { get; set; }
-    }
-
-    public enum TipoHorario : int
-    {
-        [Display(Name = "Padrão")]
-        Padrao = 1,
-        [Display(Name = "Extra")]
-        Extra = 2
-    }
-
-    public enum TipoAgendamento : int
-    {
-        [Display(Name = "Avulso")]
-        Avulso = 1,
-        [Display(Name = "Mensal")]
-        Mensal = 2
     }
 }

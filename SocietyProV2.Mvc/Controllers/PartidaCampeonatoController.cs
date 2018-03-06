@@ -38,6 +38,12 @@ namespace SocietyProV2.Mvc.Controllers
             return View(_partidaCampeonatoRepository.GetAll(id));
         }
 
+        public IActionResult Sumula(int id)
+        {
+            ViewBag.idCampeonato = id;
+            return View(_partidaCampeonatoRepository.GetAll(id));
+        }
+
         public IActionResult Create(int id)
         {
             ViewBag.idCampeonato = id;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocietyProV2.Domain.Diversos;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
 using System;

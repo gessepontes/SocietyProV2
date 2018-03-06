@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using SocietyProV2.Data.Repositories.Common;
+using SocietyProV2.Domain.Diversos;
 using SocietyProV2.Domain.Entities;
 using SocietyProV2.Domain.Interfaces.Repositories;
 using System;

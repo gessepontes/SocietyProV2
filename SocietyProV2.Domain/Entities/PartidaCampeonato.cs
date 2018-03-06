@@ -49,6 +49,9 @@ namespace SocietyProV2.Domain.Entities
         [Display(Name = "Liberar para classificação")]
         public Boolean CLASSIFICACAO { get; set; }
 
+        [Display(Name = "Observação")]
+        public String sObservacao { get; set; }
+
         public virtual Inscricao Inscricao { get; set; }
 
         public virtual Inscricao Inscricao1 { get; set; }
