@@ -9,14 +9,14 @@
         <h4 class="modal-title" id="myModalLabel">Informações do campeonato</h4>
     </div>
     <div class="modal-body">
-        <form enctype="multipart/form-data" asp-action="CreateInfor" class="form-horizontal form-label-left">
+        <form enctype="multipart/form-data" asp-action="CreateInfor" class="form-horizontal form-label-left"  data-toggle="validator">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input type="hidden" value="@Model.IDCAMPEONATO" id="IDCAMPEONATO" name="IDCAMPEONATO" />
             <div class="form-group">
                 <label asp-for="NOME" class="control-label col-md-3 col-sm-3 col-xs-12"></label>
                 <div class="col-md-5 col-sm-6 col-xs-12">
-                    <input asp-for="NOME" class="form-control col-md-7 col-xs-12" />
+                    <input asp-for="NOME" class="form-control col-md-7 col-xs-12" required/>
                 </div>
                 <span asp-validation-for="NOME" class="text-danger"></span>
             </div>

@@ -15,10 +15,11 @@ namespace SocietyProV2.Mvc.Controllers
         private readonly IInscricaoRepository _inscricaoRepository;
         private readonly IFlashMessage _flashMessage;
         private readonly IPartidaCampeonatoRepository _partidaCampeonatoRepository;
+        private readonly IJogadorPartidaCampeonatoRepository _jogadorPartidaCampeonatoRepository;
 
         public PartidaCampeonatoController(ICampeonatoRepository campeonatoRepository, IFlashMessage flashMessage, ICampoRepository campoRepository,
-            ICampoItemRepository campoItemRepository,
-           IInscricaoRepository inscricaoRepository, IPartidaCampeonatoRepository partidaCampeonatoRepository)
+            ICampoItemRepository campoItemRepository, IJogadorPartidaCampeonatoRepository jogadorPartidaCampeonatoRepository,
+        IInscricaoRepository inscricaoRepository, IPartidaCampeonatoRepository partidaCampeonatoRepository)
         {
             _campeonatoRepository = campeonatoRepository;
             _campoRepository = campoRepository;
@@ -26,7 +27,7 @@ namespace SocietyProV2.Mvc.Controllers
             _inscricaoRepository = inscricaoRepository;
             _flashMessage = flashMessage;
             _partidaCampeonatoRepository = partidaCampeonatoRepository;
-
+            _jogadorPartidaCampeonatoRepository = jogadorPartidaCampeonatoRepository;
         }
 
         public IActionResult IndexCampeonato() =>
@@ -40,8 +41,31 @@ namespace SocietyProV2.Mvc.Controllers
 
         public IActionResult Sumula(int id)
         {
-            ViewBag.idCampeonato = id;
-            return View(_partidaCampeonatoRepository.GetAll(id));
+            ViewBag.IDPartida = id;
+            ViewBag.Time1 = _jogadorPartidaCampeonatoRepository.GetJogadorSumula(id, 1);
+            ViewBag.Time2 = _jogadorPartidaCampeonatoRepository.GetJogadorSumula(id, 2);
+            return View(_partidaCampeonatoRepository.GetSumulaById(id));
+        }
+
+        public IActionResult JogadorPartida([Bind("ID,IDJogadorInscrito,IDPartidaCampeonato,iNumCamisa")] JogadorPartidaCampeonato _jogadorPartidaCampeonato, int tipo)
+        {
+            if (tipo == 1)
+            {
+                _jogadorPartidaCampeonatoRepository.Add(_jogadorPartidaCampeonato);
+            }
+            else
+            {
+                var _jogadorPartida = _jogadorPartidaCampeonatoRepository.GetById(_jogadorPartidaCampeonato.ID);
+                if (_jogadorPartida == null)
+                    return NotFound();
+
+                _jogadorPartidaCampeonatoRepository.Remove(_jogadorPartida);
+
+            }
+
+            _flashMessage.Confirmation("Operação realizada com sucesso!");
+            return RedirectToAction(nameof(Sumula), new { id = _jogadorPartidaCampeonato.IDPartidaCampeonato });
+
         }
 
         public IActionResult Create(int id)
@@ -171,7 +195,7 @@ namespace SocietyProV2.Mvc.Controllers
             }
 
 
-            return RedirectToAction(nameof(Index), new { id = _partidaCampeonato.Inscricao.IDCampeonato});
+            return RedirectToAction(nameof(Index), new { id = _partidaCampeonato.Inscricao.IDCampeonato });
         }
 
         public IActionResult ListaCampoItem(int IDCAMPO) => Json(_campoItemRepository.GetByIdCampo(IDCAMPO));

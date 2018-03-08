@@ -44,9 +44,9 @@
                                     @Html.ValueFor(modelItem => item.dDataFim, "{0:dd/MM/yyyy}")
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Index", "PartidaCampeonato" , new { id = item.IDCampeonato })"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
+                                    <a href="@Url.Action("Index", "PartidaCampeonato" , new { id = item.IDCampeonato })"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a> | 
                                     <a onclick="verificaCreatePartida(@item.IDCampeonato)"><i class="fa fa-cogs fa-lg" aria-hidden="true"></i></a>
-                                    
+
                                 </td>
                             </tr>
                         }

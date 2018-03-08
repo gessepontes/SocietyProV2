@@ -73,7 +73,7 @@ namespace SocietyProV2.Data.Repositories
         public IEnumerable<JogadorInscrito> BidDetails(int idCampeonato) =>
     conn.Query<JogadorInscrito, Jogador, Inscricao, Time, JogadorInscrito>(
         @"SELECT JI.*,J.*,I.*,T.* FROM JogadorInscrito JI INNER JOIN JOGADOR J ON JI.IDJOGADOR = J.ID INNER JOIN Inscrito I ON JI.IDInscrito = I.ID INNER JOIN TIME T ON J.idTime = T.ID WHERE I.IDCampeonato = @idCampeonato",
-        map: (jogadorInscrito, jogador, inscricao,time) =>
+        map: (jogadorInscrito, jogador, inscricao, time) =>
         {
             jogadorInscrito.Inscricao = inscricao;
             jogadorInscrito.Jogador = jogador;
